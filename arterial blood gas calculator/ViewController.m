@@ -28,7 +28,7 @@ enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CGFloat widthMargin = 11;
+    CGFloat widthMargin = 19;
     CGFloat heightMargin = 50;
     CGFloat width = [[UIScreen mainScreen] bounds].size.width;
     CGFloat height = [[UIScreen mainScreen] bounds].size.height;
@@ -36,7 +36,7 @@ enum {
         tempTextField.delegate = self;
         if (tempTextField.tag > 3) {
             CGFloat originalX = tempTextField.center.x;
-            tempTextField.frame = CGRectMake(width - widthMargin - tempTextField.frame.size.width, tempTextField.center.y - tempTextField.frame.size.height / 2, tempTextField.frame.size.width, tempTextField.frame.size.height);
+            tempTextField.frame = CGRectMake(width - 2 * widthMargin - tempTextField.frame.size.width, tempTextField.center.y - tempTextField.frame.size.height / 2, tempTextField.frame.size.width, tempTextField.frame.size.height);
             UILabel *tempLabel = rightLabels[tempTextField.tag - 4];
             tempLabel.center = CGPointMake(tempLabel.center.x + tempTextField.center.x - originalX, tempLabel.center.y);
         }
