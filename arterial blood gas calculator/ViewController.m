@@ -28,6 +28,7 @@ enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     CGFloat widthMargin = 19;
     CGFloat heightMargin = 50;
     CGFloat width = [[UIScreen mainScreen] bounds].size.width;
@@ -43,7 +44,7 @@ enum {
     }
     infoButton.frame = CGRectMake(width - widthMargin - infoButton.frame.size.width, infoButton.frame.origin.y, infoButton.frame.size.width, infoButton.frame.size.height);
     clearButton.frame = CGRectMake(widthMargin, height - heightMargin, clearButton.frame.size.width, clearButton.frame.size.height);
-    calculateButton.frame = CGRectMake(width - widthMargin - calculateButton.frame.size.width, height - heightMargin, calculateButton.frame.size.width, calculateButton.frame.size.height);
+    calculateButton.frame = CGRectMake(width - 2 * widthMargin - calculateButton.frame.size.width, calculateButton.frame.origin.y, calculateButton.frame.size.width, calculateButton.frame.size.height);
     calculateButton.alpha = 0.4;
     calculateButton.enabled = NO;
     // Do any additional setup after loading the view, typically from a nib.

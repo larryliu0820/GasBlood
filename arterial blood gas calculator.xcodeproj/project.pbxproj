@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5868A2931AAD945700627CFE /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 5868A2921AAD945700627CFE /* button.png */; };
 		F23826351AA6D3E30075F99A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F23826341AA6D3E30075F99A /* main.m */; };
 		F23826381AA6D3E30075F99A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F23826371AA6D3E30075F99A /* AppDelegate.m */; };
 		F238263B1AA6D3E30075F99A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F238263A1AA6D3E30075F99A /* ViewController.m */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5868A2921AAD945700627CFE /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = "../../../../Pictures/血气分析/button.png"; sourceTree = "<group>"; };
 		F238262F1AA6D3E30075F99A /* arterial blood gas calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "arterial blood gas calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F23826331AA6D3E30075F99A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F23826341AA6D3E30075F99A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 		F23826311AA6D3E30075F99A /* arterial blood gas calculator */ = {
 			isa = PBXGroup;
 			children = (
+				5868A2921AAD945700627CFE /* button.png */,
 				F2D5450F1AACF5E200A99ACF /* info_white.png */,
 				F2D545101AACF5E200A99ACF /* info2.png */,
 				F23826361AA6D3E30075F99A /* AppDelegate.h */,
@@ -213,6 +216,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5868A2931AAD945700627CFE /* button.png in Resources */,
 				F238263E1AA6D3E30075F99A /* Main.storyboard in Resources */,
 				F2D545121AACF5E200A99ACF /* info2.png in Resources */,
 				F2D545111AACF5E200A99ACF /* info_white.png in Resources */,
