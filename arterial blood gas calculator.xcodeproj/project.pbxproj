@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5868A2931AAD945700627CFE /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 5868A2921AAD945700627CFE /* button.png */; };
+		586E75641AAEEE4200C28734 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 586E75601AAEEE4200C28734 /* button.png */; };
+		586E75651AAEEE4200C28734 /* button2.png in Resources */ = {isa = PBXBuildFile; fileRef = 586E75611AAEEE4200C28734 /* button2.png */; };
+		586E75661AAEEE4200C28734 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = 586E75621AAEEE4200C28734 /* info.png */; };
+		586E75671AAEEE4200C28734 /* info2.png in Resources */ = {isa = PBXBuildFile; fileRef = 586E75631AAEEE4200C28734 /* info2.png */; };
 		F23826351AA6D3E30075F99A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F23826341AA6D3E30075F99A /* main.m */; };
 		F23826381AA6D3E30075F99A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F23826371AA6D3E30075F99A /* AppDelegate.m */; };
 		F238263B1AA6D3E30075F99A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F238263A1AA6D3E30075F99A /* ViewController.m */; };
@@ -15,8 +18,6 @@
 		F23826401AA6D3E30075F99A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F238263F1AA6D3E30075F99A /* Images.xcassets */; };
 		F23826431AA6D3E30075F99A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F23826411AA6D3E30075F99A /* LaunchScreen.xib */; };
 		F238264F1AA6D3E30075F99A /* arterial_blood_gas_calculatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F238264E1AA6D3E30075F99A /* arterial_blood_gas_calculatorTests.m */; };
-		F2D545111AACF5E200A99ACF /* info_white.png in Resources */ = {isa = PBXBuildFile; fileRef = F2D5450F1AACF5E200A99ACF /* info_white.png */; };
-		F2D545121AACF5E200A99ACF /* info2.png in Resources */ = {isa = PBXBuildFile; fileRef = F2D545101AACF5E200A99ACF /* info2.png */; };
 		F2D545191AACFF1C00A99ACF /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D545171AACFF1C00A99ACF /* InfoViewController.m */; };
 		F2D5451A1AACFF1C00A99ACF /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2D545181AACFF1C00A99ACF /* InfoViewController.xib */; };
 /* End PBXBuildFile section */
@@ -32,7 +33,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5868A2921AAD945700627CFE /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = "../../../../Pictures/血气分析/button.png"; sourceTree = "<group>"; };
+		586E75601AAEEE4200C28734 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = "../../../../Pictures/血气分析/button.png"; sourceTree = "<group>"; };
+		586E75611AAEEE4200C28734 /* button2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button2.png; path = "../../../../Pictures/血气分析/button2.png"; sourceTree = "<group>"; };
+		586E75621AAEEE4200C28734 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = info.png; path = "../../../../Pictures/血气分析/info.png"; sourceTree = "<group>"; };
+		586E75631AAEEE4200C28734 /* info2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = info2.png; path = "../../../../Pictures/血气分析/info2.png"; sourceTree = "<group>"; };
 		F238262F1AA6D3E30075F99A /* arterial blood gas calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "arterial blood gas calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F23826331AA6D3E30075F99A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F23826341AA6D3E30075F99A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -46,8 +50,6 @@
 		F23826481AA6D3E30075F99A /* arterial blood gas calculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "arterial blood gas calculatorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F238264D1AA6D3E30075F99A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F238264E1AA6D3E30075F99A /* arterial_blood_gas_calculatorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = arterial_blood_gas_calculatorTests.m; sourceTree = "<group>"; };
-		F2D5450F1AACF5E200A99ACF /* info_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_white.png; sourceTree = "<group>"; };
-		F2D545101AACF5E200A99ACF /* info2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info2.png; sourceTree = "<group>"; };
 		F2D545161AACFF1C00A99ACF /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		F2D545171AACFF1C00A99ACF /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		F2D545181AACFF1C00A99ACF /* InfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
@@ -92,11 +94,12 @@
 		F23826311AA6D3E30075F99A /* arterial blood gas calculator */ = {
 			isa = PBXGroup;
 			children = (
-				5868A2921AAD945700627CFE /* button.png */,
-				F2D5450F1AACF5E200A99ACF /* info_white.png */,
-				F2D545101AACF5E200A99ACF /* info2.png */,
 				F23826361AA6D3E30075F99A /* AppDelegate.h */,
 				F23826371AA6D3E30075F99A /* AppDelegate.m */,
+				586E75601AAEEE4200C28734 /* button.png */,
+				586E75611AAEEE4200C28734 /* button2.png */,
+				586E75621AAEEE4200C28734 /* info.png */,
+				586E75631AAEEE4200C28734 /* info2.png */,
 				F23826391AA6D3E30075F99A /* ViewController.h */,
 				F238263A1AA6D3E30075F99A /* ViewController.m */,
 				F238263C1AA6D3E30075F99A /* Main.storyboard */,
@@ -216,10 +219,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5868A2931AAD945700627CFE /* button.png in Resources */,
 				F238263E1AA6D3E30075F99A /* Main.storyboard in Resources */,
-				F2D545121AACF5E200A99ACF /* info2.png in Resources */,
-				F2D545111AACF5E200A99ACF /* info_white.png in Resources */,
+				586E75661AAEEE4200C28734 /* info.png in Resources */,
+				586E75671AAEEE4200C28734 /* info2.png in Resources */,
+				586E75641AAEEE4200C28734 /* button.png in Resources */,
+				586E75651AAEEE4200C28734 /* button2.png in Resources */,
 				F23826431AA6D3E30075F99A /* LaunchScreen.xib in Resources */,
 				F2D5451A1AACFF1C00A99ACF /* InfoViewController.xib in Resources */,
 				F23826401AA6D3E30075F99A /* Images.xcassets in Resources */,
