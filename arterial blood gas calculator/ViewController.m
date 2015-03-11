@@ -169,9 +169,13 @@ enum {
         [middleView addSubview:helpTableView];
         [middleView sendSubviewToBack:mainView];
         [helpButton setImage:[UIImage imageNamed:@"info2.png"] forState:UIControlStateNormal];
-    }
-    else
-    {
+    } else if ([infoView superview]) {
+        [infoView removeFromSuperview];
+        [middleView addSubview:helpTableView];
+        [middleView sendSubviewToBack:infoView];
+        [helpButton setImage:[UIImage imageNamed:@"info2.png"] forState:UIControlStateNormal];
+        [infoButton setImage:[UIImage imageNamed:@"info.png"] forState:UIControlStateNormal];
+    }else{
         [helpTableView removeFromSuperview];
         [middleView addSubview:mainView];
         [middleView sendSubviewToBack:helpTableView];
@@ -192,6 +196,12 @@ enum {
         [middleView addSubview:infoView];
         [middleView sendSubviewToBack:mainView];
         [infoButton setImage:[UIImage imageNamed:@"info2.png"] forState:UIControlStateNormal];
+    } else if ([helpTableView superview]){
+        [helpTableView removeFromSuperview];
+        [middleView addSubview:infoView];
+        [middleView sendSubviewToBack:helpTableView];
+        [infoButton setImage:[UIImage imageNamed:@"info2.png"] forState:UIControlStateNormal];
+        [helpButton setImage:[UIImage imageNamed:@"info.png"] forState:UIControlStateNormal];
     }
     else
     {
