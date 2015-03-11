@@ -7,23 +7,22 @@
 //
 
 #import "ViewController.h"
-#import "InfoViewController.h"
+#import "ExpandingCell.h"
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
 
-@synthesize alertView, textFields, pH, PaCO2, HCO3, Alb, Na, K, Cl,clearButton, calculateButton, resultTextView, rightLabels, disclaimLabel, infoButton, infoViewController;
+@synthesize alertView, textFields, pH, PaCO2, HCO3, Alb, Na, Cl,clearButton, calculateButton, resultTextView, rightLabels, disclaimLabel, infoButton,infoView, infoLabel, mainView, navigationBar, middleView, helpTableView, helpButton;
 
 enum {
     pHFieldTag = 0,
     PaCO2FieldTag,
     HCO3FieldTag,
-    AlbFieldTag,
     NaFieldTag,
-    KFieldTag,
-    ClFieldTag
+    ClFieldTag,
+    AlbFieldTag,
 };
 
 - (void)viewDidLoad {
@@ -32,32 +31,176 @@ enum {
     CGFloat widthMargin = 19;
     CGFloat heightMargin = 50;
     CGFloat width = [[UIScreen mainScreen] bounds].size.width;
-    CGFloat height = [[UIScreen mainScreen] bounds].size.height;
+    CGFloat height = [[UIScreen mainScreen] bounds].size.height - navigationBar.frame.origin.y - navigationBar.frame.size.height;
+    middleView.frame = CGRectMake(0, navigationBar.frame.origin.y + navigationBar.frame.size.height, width, height);
+    mainView.frame = CGRectMake(0, 0, middleView.frame.size.width, middleView.frame.size.height);
+
+    
     for (UITextField *tempTextField in textFields) {
         tempTextField.delegate = self;
-        if (tempTextField.tag > 3) {
+        if (tempTextField.tag > 2) {
             CGFloat originalX = tempTextField.center.x;
             tempTextField.frame = CGRectMake(width - 2 * widthMargin - tempTextField.frame.size.width, tempTextField.center.y - tempTextField.frame.size.height / 2, tempTextField.frame.size.width, tempTextField.frame.size.height);
-            UILabel *tempLabel = rightLabels[tempTextField.tag - 4];
+            UILabel *tempLabel = rightLabels[tempTextField.tag - 3];
             tempLabel.center = CGPointMake(tempLabel.center.x + tempTextField.center.x - originalX, tempLabel.center.y);
         }
     }
     infoButton.frame = CGRectMake(width - widthMargin - infoButton.frame.size.width, infoButton.frame.origin.y, infoButton.frame.size.width, infoButton.frame.size.height);
-    clearButton.frame = CGRectMake(widthMargin, height - heightMargin, clearButton.frame.size.width, clearButton.frame.size.height);
     calculateButton.frame = CGRectMake(width - 2 * widthMargin - calculateButton.frame.size.width, calculateButton.frame.origin.y, calculateButton.frame.size.width, calculateButton.frame.size.height);
     calculateButton.alpha = 0.4;
     calculateButton.enabled = NO;
     // Do any additional setup after loading the view, typically from a nib.
-    resultTextView.frame = CGRectMake(widthMargin, height / 2 - heightMargin, width - 2 * widthMargin, height / 3);
-    disclaimLabel.frame = CGRectMake(widthMargin, resultTextView.frame.origin.y + resultTextView.frame.size.height + heightMargin/2, width - 2 * widthMargin, disclaimLabel.frame.size.height);
-
-}
-- (IBAction)showInfo:(id)sender {
-    if(!infoViewController) {
-        infoViewController = [[InfoViewController alloc] initInfo];
-        infoViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    resultTextView.frame = CGRectMake(widthMargin, height / 2 - heightMargin, width - 2 * widthMargin, height * 0.4);
+    disclaimLabel.frame = CGRectMake(widthMargin, (resultTextView.frame.origin.y + resultTextView.frame.size.height + height - disclaimLabel.frame.size.height)/2, width - 2 * widthMargin, disclaimLabel.frame.size.height);
+    
+    // Info view
+    infoView = [[UIView alloc] initWithFrame:CGRectMake(0,0,width, height)];
+    [infoView setBackgroundColor:[UIColor darkGrayColor]];
+    infoLabel =[[UILabel alloc] initWithFrame:CGRectMake(widthMargin,0,width - 2 * widthMargin, height)];
+    [infoLabel setNumberOfLines:20];
+    [infoLabel setText:@"\t版本：1.0.0\n\t制作者：Larry 梦子\n\temail：eemliu@ucla.edu\n\n\n\t感谢您下载使用血气分析！由于血气分析的计算公式复杂，临床上判断多重酸碱代谢失衡十分不便。我们便萌生了使用程序代替笔算的想法。\n\t我们发现，当前appstore中的免费血气分析软件，大多操作不便或需要填写太多指标而难以应用到临床和血气相关习题中。因此我们采用了简化的计算指标。\n\t若这款软件能够帮助大家提高工作效率，我们将十分开心，并会继续努力！"];
+    [infoLabel setTextColor:[UIColor whiteColor]];
+    [infoView addSubview:infoLabel];
+    
+    // Help table View
+    helpTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,width, height)];
+    helpTableView.delegate = self;
+    helpTableView.dataSource = self;
+    
+    // Setting selectedIndex = -1 saying that there's no table selected
+    selectedIndex = -1;
+    titleArray = [[NSMutableArray alloc] init];
+    NSString *string;
+    for (int i = 0; i < 8; i++) {
+        string = [NSString stringWithFormat:@"Row %i", i];
+        [titleArray addObject:string];
     }
-    [self presentViewController:infoViewController animated:YES completion:nil];
+    
+    subtitleArray = [[NSArray alloc] initWithObjects:@"First Row",@"Second Row",@"Third Row", @"Fourth Row",@"Fifth Row", @"Sixth Row", @"Seventh Row", @"Eighth Row", nil];
+    textArray = [[NSArray alloc] initWithObjects:@"Apple",@"Orange",@"Banana",@"Blueberry",@"Grape",@"Lemon",@"Lime",@"Peach", nil];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return titleArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"expandingCell";
+    ExpandingCell *cell = (ExpandingCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if(cell == NULL) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ExpandingCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tableView.frame.size.width, cell.frame.size.height);
+    cell.textLabel.frame = CGRectMake(cell.frame.size.width - cell.textLabel.frame.size.width - 10, cell.textLabel.frame.origin.y, cell.textLabel.frame.size.width, cell.textLabel.frame.size.height);
+    cell.subtitleLabel.frame = CGRectMake(cell.frame.size.width - cell.subtitleLabel.frame.size.width - 10, cell.subtitleLabel.frame.origin.y, cell.subtitleLabel.frame.size.width, cell.subtitleLabel.frame.size.height);
+    cell.calculationLabel.frame = CGRectMake(cell.frame.size.width - cell.calculationLabel.frame.size.width - 10, cell.calculationLabel.frame.origin.y, cell.calculationLabel.frame.size.width, cell.calculationLabel.frame.size.height);
+    if (selectedIndex == indexPath.row) {
+        //Do expanding cell stuff
+        cell.contentView.backgroundColor = [UIColor lightGrayColor];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
+        cell.titleLabel.textColor = [UIColor whiteColor];
+        cell.subtitleLabel.textColor = [UIColor whiteColor];
+        cell.fruitLabel.textColor = [UIColor whiteColor];
+        cell.calcLabel.textColor = [UIColor whiteColor];
+        cell.calculationLabel.textColor = [UIColor whiteColor];
+    } else {
+        //Do closing cell stuff
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+        cell.textLabel.textColor = [UIColor blackColor];
+        cell.titleLabel.font = [UIFont systemFontOfSize:17];
+        cell.titleLabel.textColor = [UIColor blackColor];
+        cell.subtitleLabel.textColor = [UIColor blackColor];
+        cell.fruitLabel.textColor = [UIColor blackColor];
+        cell.calcLabel.textColor = [UIColor blackColor];
+        cell.calculationLabel.textColor = [UIColor blackColor];
+    }
+    
+    cell.textLabel.text = [titleArray objectAtIndex:indexPath.row];
+    cell.subtitleLabel.text = [subtitleArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [textArray objectAtIndex:indexPath.row];
+    int calculation = ((int)indexPath.row + 1) * 25;
+    cell.calculationLabel.text = [NSString stringWithFormat:@"%i", calculation];
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (selectedIndex == indexPath.row) {
+        return 100;
+    } else {
+        return 44;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //User taps expanded row
+    if (selectedIndex == indexPath.row) {
+        selectedIndex = -1;
+        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        return;
+    }
+    
+    //User taps different row
+    
+    if(selectedIndex != -1) {
+        NSIndexPath *prevPath = [NSIndexPath indexPathForRow:selectedIndex inSection:0];
+        selectedIndex = (int)indexPath.row;
+        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:prevPath]withRowAnimation:UITableViewRowAnimationFade];
+        return;
+    }
+    
+    //User taps new row with none expanded
+    selectedIndex = (int)indexPath.row;
+    [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+}
+- (IBAction)showHelp:(id)sender {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:1.0];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:middleView cache:YES];
+    
+    if ([mainView superview])
+    {
+        [mainView removeFromSuperview];
+        [middleView addSubview:helpTableView];
+        [middleView sendSubviewToBack:mainView];
+        [helpButton setImage:[UIImage imageNamed:@"info2.png"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [helpTableView removeFromSuperview];
+        [middleView addSubview:mainView];
+        [middleView sendSubviewToBack:helpTableView];
+        [helpButton setImage:[UIImage imageNamed:@"info.png"] forState:UIControlStateNormal];
+    }
+    [UIView commitAnimations];
+}
+
+- (IBAction)showInfo:(id)sender {
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:1.0];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:middleView cache:YES];
+    
+    if ([mainView superview])
+    {
+        [mainView removeFromSuperview];
+        [middleView addSubview:infoView];
+        [middleView sendSubviewToBack:mainView];
+        [infoButton setImage:[UIImage imageNamed:@"info2.png"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [infoView removeFromSuperview];
+        [middleView addSubview:mainView];
+        [middleView sendSubviewToBack:infoView];
+        [infoButton setImage:[UIImage imageNamed:@"info.png"] forState:UIControlStateNormal];
+    }
+    [UIView commitAnimations];
     
 }
 
@@ -261,9 +404,6 @@ enum {
             break;
         case NaFieldTag:
             Na = floatValue;
-            break;
-        case KFieldTag:
-            K = floatValue;
             break;
         case ClFieldTag:
             Cl = floatValue;

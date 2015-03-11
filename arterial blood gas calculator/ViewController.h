@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ViewController : UIViewController<UIApplicationDelegate> {
+@interface ViewController : UIViewController<UIApplicationDelegate, UITableViewDelegate,UITableViewDataSource> {
     IBOutletCollection(UITextField) NSArray *textFields;
+    
+    int selectedIndex;
+    NSMutableArray *titleArray;
+    NSArray *subtitleArray;
+    NSArray *textArray;
 }
 
 -(IBAction) textFieldDidEndEditing : (id) sender;
@@ -25,7 +29,6 @@
 @property (nonatomic, readwrite) CGFloat HCO3;
 @property (nonatomic, readwrite) CGFloat Alb;
 @property (nonatomic, readwrite) CGFloat Na;
-@property (nonatomic, readwrite) CGFloat K;
 @property (nonatomic, readwrite) CGFloat Cl;
 
 @property (nonatomic, strong) IBOutletCollection(UILabel) NSArray *rightLabels;
@@ -35,8 +38,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *disclaimLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *infoButton;
+@property (weak, nonatomic) IBOutlet UIButton *helpButton;
 
-@property (nonatomic, retain) UIViewController *infoViewController;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
+@property (nonatomic, retain) UIView *infoView;
+@property (nonatomic, retain) UILabel *infoLabel;
+@property (retain, nonatomic) IBOutlet UIView *mainView;
+@property (strong, nonatomic) IBOutlet UIView *middleView;
+@property (retain, nonatomic) UIView *helpView;
+@property (retain, nonatomic) UITableView *helpTableView;
 @end
 
