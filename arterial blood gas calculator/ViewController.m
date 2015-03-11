@@ -71,13 +71,14 @@ enum {
     selectedIndex = -1;
     titleArray = [[NSMutableArray alloc] init];
     NSString *string;
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 10; i++) {
         string = [NSString stringWithFormat:@"Row %i", i];
         [titleArray addObject:string];
     }
     
-    subtitleArray = [[NSArray alloc] initWithObjects:@"First Row",@"Second Row",@"Third Row", @"Fourth Row",@"Fifth Row", @"Sixth Row", @"Seventh Row", @"Eighth Row", nil];
-    textArray = [[NSArray alloc] initWithObjects:@"Apple",@"Orange",@"Banana",@"Blueberry",@"Grape",@"Lemon",@"Lime",@"Peach", nil];
+    titleArray = [[NSArray alloc] initWithObjects:@"动脉血气分析",@"pH", @"PaCO2", @"HCO3-", @"Na+、Cl-", @"Alb", @"代谢性酸中毒",@"呼吸性酸中毒", @"代谢性碱中毒",@"呼吸性碱中毒", nil];
+    subtitleArray = [[NSArray alloc] initWithObjects:@"动脉血气分析",@"pH", @"PaCO2", @"HCO3-", @"Na+、Cl-", @"Alb", @"代谢性酸中毒",@"呼吸性酸中毒", @"代谢性碱中毒",@"呼吸性碱中毒", nil];
+    textArray = [[NSArray alloc] initWithObjects:@"动脉血气分析是一项测定动脉学氧分压(PaO2)、二氧化碳分压(PaCO2)、酸碱度的检验(pH)。血气分析在重症疾病、呼吸系统疾病的治疗监护中起到十分关键的作用。因此，血气分析是ICU中最常见的检查之一。", @"ph：这是判断酸碱平衡紊乱最直接的指标。血液pH的维持主要取决于HCO3-/H2C03缓冲系统，正常人此缓冲系统比值为24/1.2（即20/1）。正常参考范围7.35~7.45。",@"PaCO2：动脉二氧化碳分压。指血液中物理溶解的CO2气体所产生的压力。PCO2基本上与物理溶解的CO2量成正比关系，而与H2CO3及HCO3-仅有间接关系。通常在37℃测定不接触空气的动脉血PCO2（简写为PaCO2）。正常参考范围35~45mmHg。", @"HCO3-：血浆碳酸氢盐。血浆标准碳酸氢盐指在标准条件下[37℃，PCO2 5.32kPa（40mmHg），Hb充分氧合]测得的血浆[HC03-]，也就是呼吸功能完全正常条件下的[HC03-]，通常根据pH与PCO2数据求得。血浆实际碳酸氢盐指血浆实际[HC03-]，即指“真正”血浆(未接触空气的血液在37oC分离的血浆)所含[HC03-]。正常参考值：22~27mmol/l。", @"血清中Na+正常参考值135~145mmol/l，Cl-正常参考值96~106mmol/l。",@"白蛋白：正常参考值40~60g/l。",@"Blueberry",@"Grape",@"Lemon",@"Lime",@"Peach", nil];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -168,18 +169,18 @@ enum {
         [mainView removeFromSuperview];
         [middleView addSubview:helpTableView];
         [middleView sendSubviewToBack:mainView];
-        [helpButton setImage:[UIImage imageNamed:@"info2.png"] forState:UIControlStateNormal];
+        [helpButton setImage:[UIImage imageNamed:@"help.png"] forState:UIControlStateNormal];
     } else if ([infoView superview]) {
         [infoView removeFromSuperview];
         [middleView addSubview:helpTableView];
         [middleView sendSubviewToBack:infoView];
-        [helpButton setImage:[UIImage imageNamed:@"info2.png"] forState:UIControlStateNormal];
+        [helpButton setImage:[UIImage imageNamed:@"help.png"] forState:UIControlStateNormal];
         [infoButton setImage:[UIImage imageNamed:@"info.png"] forState:UIControlStateNormal];
     }else{
         [helpTableView removeFromSuperview];
         [middleView addSubview:mainView];
         [middleView sendSubviewToBack:helpTableView];
-        [helpButton setImage:[UIImage imageNamed:@"info.png"] forState:UIControlStateNormal];
+        [helpButton setImage:[UIImage imageNamed:@"help.png"] forState:UIControlStateNormal];
     }
     [UIView commitAnimations];
 }
@@ -201,7 +202,7 @@ enum {
         [middleView addSubview:infoView];
         [middleView sendSubviewToBack:helpTableView];
         [infoButton setImage:[UIImage imageNamed:@"info2.png"] forState:UIControlStateNormal];
-        [helpButton setImage:[UIImage imageNamed:@"info.png"] forState:UIControlStateNormal];
+        [helpButton setImage:[UIImage imageNamed:@"help.png"] forState:UIControlStateNormal];
     }
     else
     {
