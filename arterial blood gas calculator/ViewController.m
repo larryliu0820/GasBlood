@@ -87,6 +87,7 @@ enum {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"selectedIndex = %i, indexPath.row = %i", selectedIndex, (int)indexPath.row);
     static NSString *cellIdentifier = @"expandingCell";
     ExpandingCell *cell = (ExpandingCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(cell == NULL) {
@@ -104,6 +105,7 @@ enum {
         cell.titleLabel.textColor = [UIColor whiteColor];
         cell.subtitleLabel.textColor = [UIColor whiteColor];
         cell.fruitLabel.textColor = [UIColor whiteColor];
+        [cell.fruitLabel setHidden:NO];
     } else {
         //Do closing cell stuff
         cell.contentView.backgroundColor = [UIColor whiteColor];
@@ -112,13 +114,14 @@ enum {
         cell.titleLabel.textColor = [UIColor blackColor];
         cell.subtitleLabel.textColor = [UIColor blackColor];
         cell.fruitLabel.textColor = [UIColor blackColor];
+        [cell.fruitLabel setHidden:YES];
     }
     
 //    cell.titleLabel.text = [titleArray objectAtIndex:indexPath.row];
     cell.subtitleLabel.text = [subtitleArray objectAtIndex:indexPath.row];
     cell.fruitLabel.text = [textArray objectAtIndex:indexPath.row];
     [cell.fruitLabel sizeToFit];
-    [textHeights replaceObjectAtIndex:(int)indexPath.row withObject:@(cell.fruitLabel.frame.size.height + cell.fruitLabel.frame.origin.y)];
+    [textHeights replaceObjectAtIndex:(int)indexPath.row withObject:@(cell.fruitLabel.frame.size.height + cell.fruitLabel.frame.origin.y + 5)];
     return cell;
 }
 
@@ -144,7 +147,6 @@ enum {
         NSIndexPath *prevPath = [NSIndexPath indexPathForRow:selectedIndex inSection:0];
         selectedIndex = (int)indexPath.row;
         [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:prevPath]withRowAnimation:UITableViewRowAnimationFade];
-        return;
     }
     
     //User taps new row with none expanded
