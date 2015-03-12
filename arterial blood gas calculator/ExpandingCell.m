@@ -9,7 +9,7 @@
 #import "ExpandingCell.h"
 
 @implementation ExpandingCell
-@synthesize textLabel,fruitLabel,titleLabel,calcLabel, subtitleLabel, calculationLabel;
+@synthesize fruitLabel,titleLabel, subtitleLabel;
 - (void)awakeFromNib {
     // Initialization code
 }

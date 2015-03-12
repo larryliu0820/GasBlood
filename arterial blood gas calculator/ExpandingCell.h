@@ -12,8 +12,5 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *subtitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *textLabel;
-@property (strong, nonatomic) IBOutlet UILabel *calculationLabel;
 @property (strong, nonatomic) IBOutlet UILabel *fruitLabel;
-@property (strong, nonatomic) IBOutlet UILabel *calcLabel;
 @end

@@ -48,5 +48,8 @@
 @property (strong, nonatomic) IBOutlet UIView *middleView;
 @property (retain, nonatomic) UIView *helpView;
 @property (retain, nonatomic) UITableView *helpTableView;
+
+@property (retain, nonatomic) NSMutableArray *textHeights;
+
 @end
 

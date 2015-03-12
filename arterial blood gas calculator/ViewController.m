@@ -14,7 +14,7 @@
 
 @implementation ViewController
 
-@synthesize alertView, textFields, pH, PaCO2, HCO3, Alb, Na, Cl,clearButton, calculateButton, resultTextView, rightLabels, disclaimLabel, infoButton,infoView, infoLabel, mainView, navigationBar, middleView, helpTableView, helpButton;
+@synthesize alertView, textFields, pH, PaCO2, HCO3, Alb, Na, Cl,clearButton, calculateButton, resultTextView, rightLabels, disclaimLabel, infoButton,infoView, infoLabel, mainView, navigationBar, middleView, helpTableView, helpButton, textHeights;
 
 enum {
     pHFieldTag = 0,
@@ -50,7 +50,7 @@ enum {
     calculateButton.alpha = 0.4;
     calculateButton.enabled = NO;
     // Do any additional setup after loading the view, typically from a nib.
-    resultTextView.frame = CGRectMake(widthMargin, height / 2 - heightMargin, width - 2 * widthMargin, height * 0.4);
+    resultTextView.frame = CGRectMake(widthMargin, clearButton.frame.origin.y + clearButton.frame.size.height + 15, width - 2 * widthMargin, height - 67 - resultTextView.frame.origin.y);
     disclaimLabel.frame = CGRectMake(widthMargin, (resultTextView.frame.origin.y + resultTextView.frame.size.height + height - disclaimLabel.frame.size.height)/2, width - 2 * widthMargin, disclaimLabel.frame.size.height);
     
     // Info view
@@ -69,14 +69,11 @@ enum {
     
     // Setting selectedIndex = -1 saying that there's no table selected
     selectedIndex = -1;
-    titleArray = [[NSMutableArray alloc] init];
-    NSString *string;
-    for (int i = 0; i < 10; i++) {
-        string = [NSString stringWithFormat:@"Row %i", i];
-        [titleArray addObject:string];
-    }
     
-    titleArray = [[NSArray alloc] initWithObjects:@"动脉血气分析",@"pH", @"PaCO2", @"HCO3-", @"Na+、Cl-", @"Alb", @"代谢性酸中毒",@"呼吸性酸中毒", @"代谢性碱中毒",@"呼吸性碱中毒", nil];
+    titleArray = [[NSMutableArray alloc] initWithObjects:@"动脉血气分析",@"pH", @"PaCO2", @"HCO3-", @"Na+、Cl-", @"Alb", @"代谢性酸中毒",@"呼吸性酸中毒", @"代谢性碱中毒",@"呼吸性碱中毒", nil];
+    textHeights = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < [titleArray count]; ++i)
+        [textHeights addObject:[NSNumber numberWithInt:0]];
     subtitleArray = [[NSArray alloc] initWithObjects:@"动脉血气分析",@"pH", @"PaCO2", @"HCO3-", @"Na+、Cl-", @"Alb", @"代谢性酸中毒",@"呼吸性酸中毒", @"代谢性碱中毒",@"呼吸性碱中毒", nil];
     textArray = [[NSArray alloc] initWithObjects:@"动脉血气分析是一项测定动脉学氧分压(PaO2)、二氧化碳分压(PaCO2)、酸碱度的检验(pH)。血气分析在重症疾病、呼吸系统疾病的治疗监护中起到十分关键的作用。因此，血气分析是ICU中最常见的检查之一。", @"ph：这是判断酸碱平衡紊乱最直接的指标。血液pH的维持主要取决于HCO3-/H2C03缓冲系统，正常人此缓冲系统比值为24/1.2（即20/1）。正常参考范围7.35~7.45。",@"PaCO2：动脉二氧化碳分压。指血液中物理溶解的CO2气体所产生的压力。PCO2基本上与物理溶解的CO2量成正比关系，而与H2CO3及HCO3-仅有间接关系。通常在37℃测定不接触空气的动脉血PCO2（简写为PaCO2）。正常参考范围35~45mmHg。", @"HCO3-：血浆碳酸氢盐。血浆标准碳酸氢盐指在标准条件下[37℃，PCO2 5.32kPa（40mmHg），Hb充分氧合]测得的血浆[HC03-]，也就是呼吸功能完全正常条件下的[HC03-]，通常根据pH与PCO2数据求得。血浆实际碳酸氢盐指血浆实际[HC03-]，即指“真正”血浆(未接触空气的血液在37oC分离的血浆)所含[HC03-]。正常参考值：22~27mmol/l。", @"血清中Na+正常参考值135~145mmol/l，Cl-正常参考值96~106mmol/l。",@"白蛋白：正常参考值40~60g/l。",@"Blueberry",@"Grape",@"Lemon",@"Lime",@"Peach", nil];
 }
@@ -96,10 +93,9 @@ enum {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ExpandingCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-    cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tableView.frame.size.width, cell.frame.size.height);
-    cell.textLabel.frame = CGRectMake(cell.frame.size.width - cell.textLabel.frame.size.width - 10, cell.textLabel.frame.origin.y, cell.textLabel.frame.size.width, cell.textLabel.frame.size.height);
-    cell.subtitleLabel.frame = CGRectMake(cell.frame.size.width - cell.subtitleLabel.frame.size.width - 10, cell.subtitleLabel.frame.origin.y, cell.subtitleLabel.frame.size.width, cell.subtitleLabel.frame.size.height);
-    cell.calculationLabel.frame = CGRectMake(cell.frame.size.width - cell.calculationLabel.frame.size.width - 10, cell.calculationLabel.frame.origin.y, cell.calculationLabel.frame.size.width, cell.calculationLabel.frame.size.height);
+    cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tableView.frame.size.width - 10, cell.frame.size.height);
+    cell.fruitLabel.frame = CGRectMake(10, cell.fruitLabel.frame.origin.y, cell.frame.size.width - 20, cell.fruitLabel.frame.size.height);
+    cell.subtitleLabel.frame = CGRectMake(cell.frame.size.width - cell.subtitleLabel.frame.size.width, cell.subtitleLabel.frame.origin.y, cell.subtitleLabel.frame.size.width, cell.subtitleLabel.frame.size.height);
     if (selectedIndex == indexPath.row) {
         //Do expanding cell stuff
         cell.contentView.backgroundColor = [UIColor lightGrayColor];
@@ -108,8 +104,6 @@ enum {
         cell.titleLabel.textColor = [UIColor whiteColor];
         cell.subtitleLabel.textColor = [UIColor whiteColor];
         cell.fruitLabel.textColor = [UIColor whiteColor];
-        cell.calcLabel.textColor = [UIColor whiteColor];
-        cell.calculationLabel.textColor = [UIColor whiteColor];
     } else {
         //Do closing cell stuff
         cell.contentView.backgroundColor = [UIColor whiteColor];
@@ -118,21 +112,19 @@ enum {
         cell.titleLabel.textColor = [UIColor blackColor];
         cell.subtitleLabel.textColor = [UIColor blackColor];
         cell.fruitLabel.textColor = [UIColor blackColor];
-        cell.calcLabel.textColor = [UIColor blackColor];
-        cell.calculationLabel.textColor = [UIColor blackColor];
     }
     
-    cell.textLabel.text = [titleArray objectAtIndex:indexPath.row];
+//    cell.titleLabel.text = [titleArray objectAtIndex:indexPath.row];
     cell.subtitleLabel.text = [subtitleArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [textArray objectAtIndex:indexPath.row];
-    int calculation = ((int)indexPath.row + 1) * 25;
-    cell.calculationLabel.text = [NSString stringWithFormat:@"%i", calculation];
+    cell.fruitLabel.text = [textArray objectAtIndex:indexPath.row];
+    [cell.fruitLabel sizeToFit];
+    [textHeights replaceObjectAtIndex:(int)indexPath.row withObject:@(cell.fruitLabel.frame.size.height + cell.fruitLabel.frame.origin.y)];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (selectedIndex == indexPath.row) {
-        return 100;
+        return [[textHeights objectAtIndex:(int)indexPath.row] floatValue];
     } else {
         return 44;
     }
