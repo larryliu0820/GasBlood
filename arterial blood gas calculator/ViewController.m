@@ -57,8 +57,17 @@ enum {
     infoView = [[UIView alloc] initWithFrame:CGRectMake(0,0,width, height)];
     [infoView setBackgroundColor:[UIColor darkGrayColor]];
     infoLabel =[[UILabel alloc] initWithFrame:CGRectMake(widthMargin,0,width - 2 * widthMargin, height)];
-    [infoLabel setNumberOfLines:20];
-    [infoLabel setText:@"\t版本：1.0.0\n\t制作者：Larry 梦子\n\temail：eemliu@ucla.edu\n\n\n\t感谢您下载使用血气分析！由于血气分析的计算公式复杂，临床上判断多重酸碱代谢失衡十分不便。我们便萌生了使用程序代替笔算的想法。\n\t我们发现，当前appstore中的免费血气分析软件，大多操作不便或需要填写太多指标而难以应用到临床和血气相关习题中。因此我们采用了简化的计算指标。\n\t若这款软件能够帮助大家提高工作效率，我们将十分开心，并会继续努力！"];
+    [infoLabel setNumberOfLines:0];
+    NSString *info = @"\t版本：1.0.0\n\t制作者：Larry 梦子\n\tEmail：mengweiliu600267@gmail.com\n\n\t感谢您下载使用血气分析！由于血气分析的计算公式复杂，临床上判断多重酸碱代谢失衡十分不便。我们便萌生了使用程序代替笔算的想法。\n\t我们发现，当前appstore中的免费血气分析软件，大多操作不便或需要填写太多指标而难以应用到临床和血气相关习题中。因此我们采用了简化的计算指标。\n\t若这款软件能够帮助大家提高工作效率，我们将十分开心，并会继续努力！";
+    NSMutableAttributedString* attrString = [[NSMutableAttributedString alloc] initWithString:info];
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    [style setLineSpacing:6];
+    [attrString addAttribute:NSParagraphStyleAttributeName
+                       value:style
+                       range:NSMakeRange(0, info.length)];
+    infoLabel.attributedText = attrString;
+//    [infoLabel setText:info];
+    
     [infoLabel setTextColor:[UIColor whiteColor]];
     [infoView addSubview:infoLabel];
     
