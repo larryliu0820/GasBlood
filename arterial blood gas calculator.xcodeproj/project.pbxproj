@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		580BA54E1AB04ACC00426BEF /* help.png in Resources */ = {isa = PBXBuildFile; fileRef = 580BA54D1AB04ACC00426BEF /* help.png */; };
+		586339A11AB13628008A7823 /* help.png in Resources */ = {isa = PBXBuildFile; fileRef = 586339A01AB13628008A7823 /* help.png */; };
 		58EE1D051AAFBC55003744A2 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 58EE1D011AAFBC55003744A2 /* button.png */; };
 		58EE1D061AAFBC55003744A2 /* info2.png in Resources */ = {isa = PBXBuildFile; fileRef = 58EE1D021AAFBC55003744A2 /* info2.png */; };
 		58EE1D071AAFBC55003744A2 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = 58EE1D031AAFBC55003744A2 /* info.png */; };
@@ -34,7 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		580BA54D1AB04ACC00426BEF /* help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = help.png; path = "../../../../Pictures/血气分析/help.png"; sourceTree = "<group>"; };
+		586339A01AB13628008A7823 /* help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help.png; sourceTree = "<group>"; };
 		58EE1D011AAFBC55003744A2 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		58EE1D021AAFBC55003744A2 /* info2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info2.png; sourceTree = "<group>"; };
 		58EE1D031AAFBC55003744A2 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
@@ -98,8 +98,8 @@
 			children = (
 				F2D545221AB014A000A99ACF /* ExpandingCell */,
 				58EE1D011AAFBC55003744A2 /* button.png */,
-				580BA54D1AB04ACC00426BEF /* help.png */,
 				58EE1D021AAFBC55003744A2 /* info2.png */,
+				586339A01AB13628008A7823 /* help.png */,
 				58EE1D031AAFBC55003744A2 /* info.png */,
 				58EE1D041AAFBC55003744A2 /* button2.png */,
 				F23826361AA6D3E30075F99A /* AppDelegate.h */,
@@ -232,7 +232,7 @@
 			files = (
 				F238263E1AA6D3E30075F99A /* Main.storyboard in Resources */,
 				58EE1D071AAFBC55003744A2 /* info.png in Resources */,
-				580BA54E1AB04ACC00426BEF /* help.png in Resources */,
+				586339A11AB13628008A7823 /* help.png in Resources */,
 				58EE1D051AAFBC55003744A2 /* button.png in Resources */,
 				58EE1D061AAFBC55003744A2 /* info2.png in Resources */,
 				58EE1D081AAFBC55003744A2 /* button2.png in Resources */,
