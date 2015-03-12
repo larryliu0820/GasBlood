@@ -58,7 +58,7 @@ enum {
     [infoView setBackgroundColor:[UIColor darkGrayColor]];
     infoLabel =[[UILabel alloc] initWithFrame:CGRectMake(widthMargin,0,width - 2 * widthMargin, height)];
     [infoLabel setNumberOfLines:0];
-    NSString *info = @"\t版本：1.0.0\n\t制作者：Larry 梦子\n\tEmail：mengweiliu600267@gmail.com\n\n\t感谢您下载使用血气分析！由于血气分析的计算公式复杂，临床上判断多重酸碱代谢失衡十分不便。我们便萌生了使用程序代替笔算的想法。\n\t我们发现，当前appstore中的免费血气分析软件，大多操作不便或需要填写太多指标而难以应用到临床和血气相关习题中。因此我们采用了简化的计算指标。\n\t若这款软件能够帮助大家提高工作效率，我们将十分开心，并会继续努力！";
+    NSString *info = @"版本：1.0.0\n制作者：Larry 梦子\nEmail：mengweiliu600267@gmail.com\n\n\t感谢您下载使用动脉血气分析！由于血气分析的计算公式复杂，临床上判断多重酸碱失衡十分不便。我们便萌生了使用程序代替笔算的想法。\n\t我们发现，当前appstore中的免费血气分析软件，大多因操作不便或需要填写太多指标而难以应用。因而本软件采用了简化的计算指标。\n\t忠心希望这款软件能够对各位的工作有所帮助！";
     NSMutableAttributedString* attrString = [[NSMutableAttributedString alloc] initWithString:info];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     [style setLineSpacing:6];
@@ -84,7 +84,7 @@ enum {
     for (NSInteger i = 0; i < [titleArray count]; ++i)
         [textHeights addObject:[NSNumber numberWithInt:0]];
     subtitleArray = [[NSArray alloc] initWithObjects:@"动脉血气分析",@"pH", @"PaCO2", @"HCO3-", @"Na+、Cl-", @"Alb", @"代谢性酸中毒",@"呼吸性酸中毒", @"代谢性碱中毒",@"呼吸性碱中毒", nil];
-    textArray = [[NSArray alloc] initWithObjects:@"动脉血气分析是一项测定动脉学氧分压(PaO2)、二氧化碳分压(PaCO2)、酸碱度的检验(pH)。血气分析在重症疾病、呼吸系统疾病的治疗监护中起到十分关键的作用。因此，血气分析是ICU中最常见的检查之一。", @"ph：这是判断酸碱平衡紊乱最直接的指标。血液pH的维持主要取决于HCO3-/H2C03缓冲系统，正常人此缓冲系统比值为24/1.2（即20/1）。正常参考范围7.35~7.45。",@"PaCO2：动脉二氧化碳分压。指血液中物理溶解的CO2气体所产生的压力。PCO2基本上与物理溶解的CO2量成正比关系，而与H2CO3及HCO3-仅有间接关系。通常在37℃测定不接触空气的动脉血PCO2（简写为PaCO2）。正常参考范围35~45mmHg。", @"HCO3-：血浆碳酸氢盐。血浆标准碳酸氢盐指在标准条件下[37℃，PCO2 5.32kPa（40mmHg），Hb充分氧合]测得的血浆[HC03-]，也就是呼吸功能完全正常条件下的[HC03-]，通常根据pH与PCO2数据求得。血浆实际碳酸氢盐指血浆实际[HC03-]，即指“真正”血浆(未接触空气的血液在37oC分离的血浆)所含[HC03-]。正常参考值：22~27mmol/l。", @"血清中Na+正常参考值135~145mmol/l，Cl-正常参考值96~106mmol/l。",@"白蛋白：正常参考值40~60g/l。",@"Blueberry",@"Grape",@"Lemon",@"Lime",@"Peach", nil];
+    textArray = [[NSArray alloc] initWithObjects:@"\t动脉血气分析是一项测定动脉学氧分压(PaO2)、二氧化碳分压(PaCO2)、酸碱度的检验(pH)。血气分析在重症疾病、呼吸系统疾病的治疗监护中起到十分关键的作用。因此，血气分析是ICU中最常见的检查之一。", @"\tph：判断酸碱平衡紊乱最直接的指标。血液pH的维持主要取决于HCO3-/H2C03缓冲系统，正常人此缓冲系统比值为20/1。正常参考范围7.35~7.45。",@"\tPaCO2：动脉二氧化碳分压。指血液中物理溶解的CO2气体所产生的压力。PCO2基本上与物理溶解的CO2量成正比关系，而与H2CO3及HCO3-仅有间接关系。正常参考范围35~45mmHg。",@"\tHCO3-：血浆碳酸氢盐。血浆标准碳酸氢盐指在标准条件下[37℃，PCO2 5.32kPa（40mmHg），Hb充分氧合]测得的血浆[HC03-]，也就是呼吸功能完全正常条件下的[HC03-]，通常根据pH与PCO2数据求得。血浆实际碳酸氢盐指血浆实际[HC03-]，即指“真正”血浆(未接触空气的血液在37oC分离的血浆)所含[HC03-]。正常参考值：22~27mmol/l。", @"\t血清中Na+正常参考值135~145mmol/l，Cl-正常参考值96~106mmol/l。",@"\t白蛋白：血浆白蛋白带有负电荷，当其从血液中丢失时其他阴离子如CL-、HCO3-便会增加，因而阴离子间隙会相应下降。低白蛋白血症时，白蛋白每下降10g/L，阴离子间隙正常值下降2.5~3mmol/L。正常参考值40~60g/l。",@"\t阴离子间隙（AG）升高代谢性酸中毒见于：1)乳酸酸中毒；2）酮症酸中毒；3）药物或毒物，如醇类、水杨酸类、二甲双胍、硫酸盐等；4）慢性肾功能衰竭；5）大量横纹肌溶解。\n\tAG正常代谢性酸中毒见于HCO3-丢失：1）长期腹泻；2）使用托吡酯；3）胰瘘；4）输尿管-乙状结肠吻合术；5）肾小管性酸中毒；6）药物或毒物（氯化铵、乙酰唑胺、胆汁酸螯合剂、异丙醇）；7）肾功能衰竭；8）吸入剂滥用；9）甲苯",@"\t急性呼吸性酸中毒见于：1）呼吸中枢抑制（中枢系统疾病或药物）；2）神经肌肉疾病（重症肌无力，脊髓侧索硬化症、格林巴利综合征、肌萎缩症；3）气道梗阻（哮喘或COPD急性加重）。",@"\t氯反应性（低氯性）碱中毒（尿氯<20mmol/L）见于：1）呕吐胃内容物或胃管减压；2）先天性失氯性腹泻；3）收缩性碱中毒（使用袢利尿剂、噻嗪类利尿剂使细胞外液流失、HCO3-浓缩所致）；4）呼吸性酸中毒中高碳酸血症突然被纠正；5）囊性纤维化。\n\t氯抵抗性碱中毒（尿氯>20mmol/L）见于：1）低钾血症；2）碱性物质摄入过多；3）高醛固酮血症；4）长期过量甘草酸摄入；5）Bartter综合征、 Gitelman综合征；6）Liddle综合征；7）11β-羟化酶缺乏症、17α-羟化酶缺乏症；8）氨基糖苷类毒性反应",@"\t呼吸性碱中毒见于：1）机械通气；2）精神因素过度通气；3）中枢疾病（卒中、蛛网膜下腔出血、脑膜炎）；4）药物应用（多沙普仑、阿司匹林、咖啡因等）；5）移居高海拔地区；6）肺部疾病如肺炎所致过度通气；7）发热；8）妊娠；9）血NH3升高", nil];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -172,12 +172,12 @@ enum {
         [mainView removeFromSuperview];
         [middleView addSubview:helpTableView];
         [middleView sendSubviewToBack:mainView];
-        [helpButton setImage:[UIImage imageNamed:@"help.png"] forState:UIControlStateNormal];
+        [helpButton setImage:[UIImage imageNamed:@"help2.png"] forState:UIControlStateNormal];
     } else if ([infoView superview]) {
         [infoView removeFromSuperview];
         [middleView addSubview:helpTableView];
         [middleView sendSubviewToBack:infoView];
-        [helpButton setImage:[UIImage imageNamed:@"help.png"] forState:UIControlStateNormal];
+        [helpButton setImage:[UIImage imageNamed:@"help2.png"] forState:UIControlStateNormal];
         [infoButton setImage:[UIImage imageNamed:@"info.png"] forState:UIControlStateNormal];
     }else{
         [helpTableView removeFromSuperview];
