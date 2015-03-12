@@ -96,7 +96,7 @@ enum {
     cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, tableView.frame.size.width - 10, cell.frame.size.height);
     cell.fruitLabel.frame = CGRectMake(10, cell.fruitLabel.frame.origin.y, cell.frame.size.width - 20, cell.fruitLabel.frame.size.height);
     cell.subtitleLabel.frame = CGRectMake(cell.frame.size.width - cell.subtitleLabel.frame.size.width, cell.subtitleLabel.frame.origin.y, cell.subtitleLabel.frame.size.width, cell.subtitleLabel.frame.size.height);
-    if (selectedIndex == indexPath.row) {
+    if (selectedIndex == (int)indexPath.row) {
         //Do expanding cell stuff
         cell.contentView.backgroundColor = [UIColor lightGrayColor];
         cell.textLabel.textColor = [UIColor whiteColor];
