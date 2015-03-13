@@ -10,7 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lauching.png" translatesAutoresizingMaskIntoConstraints="NO" id="m4c-eE-JIm">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launching2.png" translatesAutoresizingMaskIntoConstraints="NO" id="m4c-eE-JIm">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
             </subviews>
@@ -27,7 +27,7 @@
         </view>
     </objects>
     <resources>
-        <image name="lauching.png" width="1080" height="1920"/>
+        <image name="launching2.png" width="1080" height="1920"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
