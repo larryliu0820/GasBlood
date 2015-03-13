@@ -10,23 +10,25 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="血气分析 " lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3e-oh-P0v">
-                    <rect key="frame" x="138" y="287" width="99" height="94"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lauching.png" translatesAutoresizingMaskIntoConstraints="NO" id="m4c-eE-JIm">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.90980398654937744" green="0.91764712333679199" blue="0.91372555494308472" alpha="1" colorSpace="deviceRGB"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="c3e-oh-P0v" secondAttribute="centerX" id="P0B-6p-o7n"/>
-                <constraint firstAttribute="centerY" secondItem="c3e-oh-P0v" secondAttribute="centerY" constant="-0.5" id="jVA-3o-Z1s"/>
+                <constraint firstItem="m4c-eE-JIm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2nP-1e-hbG"/>
+                <constraint firstAttribute="bottom" secondItem="m4c-eE-JIm" secondAttribute="bottom" id="Ccf-Sw-xMW"/>
+                <constraint firstItem="m4c-eE-JIm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FlU-f3-OiL"/>
+                <constraint firstAttribute="trailing" secondItem="m4c-eE-JIm" secondAttribute="trailing" id="QFv-5b-Fbz"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="547.5" y="454.5"/>
+            <point key="canvasLocation" x="552.5" y="470.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="lauching.png" width="1080" height="1920"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
