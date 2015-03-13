@@ -29,7 +29,6 @@ enum {
     [super viewDidLoad];
     
     CGFloat widthMargin = 19;
-    CGFloat heightMargin = 50;
     CGFloat width = [[UIScreen mainScreen] bounds].size.width;
     CGFloat height = [[UIScreen mainScreen] bounds].size.height - navigationBar.frame.origin.y - navigationBar.frame.size.height;
     middleView.frame = CGRectMake(0, navigationBar.frame.origin.y + navigationBar.frame.size.height, width, height);
@@ -51,14 +50,14 @@ enum {
     calculateButton.enabled = NO;
     // Do any additional setup after loading the view, typically from a nib.
     resultTextView.frame = CGRectMake(widthMargin, clearButton.frame.origin.y + clearButton.frame.size.height + 15, width - 2 * widthMargin, height - 67 - resultTextView.frame.origin.y);
+    resultTextView.editable = NO;
     disclaimLabel.frame = CGRectMake(widthMargin, (resultTextView.frame.origin.y + resultTextView.frame.size.height + height - disclaimLabel.frame.size.height)/2, width - 2 * widthMargin, disclaimLabel.frame.size.height);
     
     // Info view
-    infoView = [[UIView alloc] initWithFrame:CGRectMake(0,0,width, height)];
-    [infoView setBackgroundColor:[UIColor darkGrayColor]];
+    
     infoLabel =[[UILabel alloc] initWithFrame:CGRectMake(widthMargin,0,width - 2 * widthMargin, height)];
     [infoLabel setNumberOfLines:0];
-    NSString *info = @"版本：1.0.0\n制作者：Larry 梦子\nEmail：mengweiliu600267@gmail.com\n\n\t感谢您下载使用动脉血气分析！由于血气分析的计算公式复杂，临床上判断多重酸碱失衡十分不便。我们便萌生了使用程序代替笔算的想法。\n\t我们发现，当前appstore中的免费血气分析软件，大多因操作不便或需要填写太多指标而难以应用。因而本软件采用了简化的计算指标。\n\t忠心希望这款软件能够对各位的工作有所帮助！";
+    NSString *info = @"版本：1.0.0\n制作者：Larry 梦子\nEmail：mengweiliu600267@gmail.com\n\n\t感谢您下载使用动脉血气分析！由于血气分析的计算公式复杂，临床上判断多重酸碱失衡十分不便，我们萌生了使用程序代替笔算的想法。\n\t我们发现，当前App Store中的免费血气分析软件，大多操作繁琐或需要填写指标过多而难以使用，因此本软件简化了计算指标。\n\t衷心希望这款软件能够对各位的工作有所帮助！";
     NSMutableAttributedString* attrString = [[NSMutableAttributedString alloc] initWithString:info];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     [style setLineSpacing:6];
@@ -69,6 +68,8 @@ enum {
 //    [infoLabel setText:info];
     
     [infoLabel setTextColor:[UIColor whiteColor]];
+    infoView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,width, infoLabel.frame.size.height)];
+    [infoView setBackgroundColor:[UIColor darkGrayColor]];
     [infoView addSubview:infoLabel];
     
     // Help table View

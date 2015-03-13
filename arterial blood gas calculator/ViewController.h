@@ -42,7 +42,7 @@
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
-@property (nonatomic, retain) UIView *infoView;
+@property (nonatomic, retain) UIScrollView *infoView;
 @property (nonatomic, retain) UILabel *infoLabel;
 @property (retain, nonatomic) IBOutlet UIView *mainView;
 @property (strong, nonatomic) IBOutlet UIView *middleView;
