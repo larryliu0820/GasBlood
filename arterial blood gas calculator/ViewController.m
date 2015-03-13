@@ -395,7 +395,7 @@ enum {
     }
     CGFloat floatValue = (CGFloat)[textField.text floatValue];
     if (floatValue == 0.0) {
-        alertView = [[UIAlertView alloc] initWithTitle:@"Invalid value!" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        alertView = [[UIAlertView alloc] initWithTitle:@"输入错误，请重新输入!" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alertView show];
         textField.text = nil;
         calculateButton.alpha = 0.4;
@@ -405,24 +405,66 @@ enum {
     
     NSLog(@"here!textView.tag = %li, %f", textField.tag, floatValue);
     switch (textField.tag) {
-        case pHFieldTag:
+        case pHFieldTag: {
+            if(floatValue < 7.35 || floatValue > 7.45) {
+                alertView = [[UIAlertView alloc] initWithTitle:@"pH值正常范围7.35~7.45" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alertView show];
+                textField.text = nil;
+                break;
+            }
             pH = floatValue;
             break;
-        case PaCO2FieldTag:
+        }
+        case PaCO2FieldTag: {
+            if(floatValue < 35 || floatValue > 45) {
+                alertView = [[UIAlertView alloc] initWithTitle:@"PaCO2值正常范围35~45mmHg" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alertView show];
+                textField.text = nil;
+                break;
+            }
             PaCO2 = floatValue;
             break;
-        case HCO3FieldTag:
+        }
+        case HCO3FieldTag:{
+            if(floatValue < 22 || floatValue > 27) {
+                alertView = [[UIAlertView alloc] initWithTitle:@"HCO3值正常范围22~27mmol/L" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alertView show];
+                textField.text = nil;
+                break;
+            }
             HCO3 = floatValue;
             break;
-        case AlbFieldTag:
+        }
+        case AlbFieldTag:{
+            if(floatValue < 40 || floatValue > 60) {
+                alertView = [[UIAlertView alloc] initWithTitle:@"Alb值正常范围40~60g/L" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alertView show];
+                textField.text = nil;
+                break;
+            }
             Alb = floatValue;
             break;
-        case NaFieldTag:
+        }
+        case NaFieldTag:{
+            if(floatValue < 135 || floatValue > 145) {
+                alertView = [[UIAlertView alloc] initWithTitle:@"Na+值正常范围135~145mmol/L" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alertView show];
+                textField.text = nil;
+                break;
+            }
             Na = floatValue;
             break;
-        case ClFieldTag:
+        }
+        case ClFieldTag:{
+            if(floatValue < 96 || floatValue > 106) {
+                alertView = [[UIAlertView alloc] initWithTitle:@"Cl-值正常范围96~106mmol/L" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alertView show];
+                textField.text = nil;
+                break;
+            }
             Cl = floatValue;
             break;
+        }
         default:
             break;
     }
