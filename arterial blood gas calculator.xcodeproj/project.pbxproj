@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		585B2EF21AB2F2150098BFD6 /* ABGicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 585B2EEF1AB2F2150098BFD6 /* ABGicon.png */; };
+		585B2EF31AB2F2150098BFD6 /* ABGicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 585B2EF01AB2F2150098BFD6 /* ABGicon@2x.png */; };
+		585B2EF41AB2F2150098BFD6 /* ABGicon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 585B2EF11AB2F2150098BFD6 /* ABGicon@3x.png */; };
 		586339A11AB13628008A7823 /* help.png in Resources */ = {isa = PBXBuildFile; fileRef = 586339A01AB13628008A7823 /* help.png */; };
 		58A854301AB1CCE200CFDB05 /* help2.png in Resources */ = {isa = PBXBuildFile; fileRef = 58A8542F1AB1CCE200CFDB05 /* help2.png */; };
 		58EE1D051AAFBC55003744A2 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 58EE1D011AAFBC55003744A2 /* button.png */; };
@@ -37,6 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		585B2EEF1AB2F2150098BFD6 /* ABGicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ABGicon.png; sourceTree = "<group>"; };
+		585B2EF01AB2F2150098BFD6 /* ABGicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ABGicon@2x.png"; sourceTree = "<group>"; };
+		585B2EF11AB2F2150098BFD6 /* ABGicon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ABGicon@3x.png"; sourceTree = "<group>"; };
 		586339A01AB13628008A7823 /* help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help.png; sourceTree = "<group>"; };
 		58A8542F1AB1CCE200CFDB05 /* help2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help2.png; sourceTree = "<group>"; };
 		58EE1D011AAFBC55003744A2 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
@@ -109,6 +115,9 @@
 				586339A01AB13628008A7823 /* help.png */,
 				58EE1D031AAFBC55003744A2 /* info.png */,
 				58EE1D041AAFBC55003744A2 /* button2.png */,
+				585B2EEF1AB2F2150098BFD6 /* ABGicon.png */,
+				585B2EF01AB2F2150098BFD6 /* ABGicon@2x.png */,
+				585B2EF11AB2F2150098BFD6 /* ABGicon@3x.png */,
 				F29E12581AB2D68A000F403A /* lauching.png */,
 				F29E125A1AB2D9A5000F403A /* launching2.png */,
 				F23826361AA6D3E30075F99A /* AppDelegate.h */,
@@ -241,11 +250,14 @@
 			files = (
 				F29E12591AB2D68A000F403A /* lauching.png in Resources */,
 				F238263E1AA6D3E30075F99A /* Main.storyboard in Resources */,
+				585B2EF31AB2F2150098BFD6 /* ABGicon@2x.png in Resources */,
 				58EE1D071AAFBC55003744A2 /* info.png in Resources */,
 				586339A11AB13628008A7823 /* help.png in Resources */,
 				58EE1D051AAFBC55003744A2 /* button.png in Resources */,
 				58EE1D061AAFBC55003744A2 /* info2.png in Resources */,
 				58EE1D081AAFBC55003744A2 /* button2.png in Resources */,
+				585B2EF21AB2F2150098BFD6 /* ABGicon.png in Resources */,
+				585B2EF41AB2F2150098BFD6 /* ABGicon@3x.png in Resources */,
 				F23826431AA6D3E30075F99A /* LaunchScreen.xib in Resources */,
 				F29E125B1AB2D9A5000F403A /* launching2.png in Resources */,
 				F2D545261AB016E000A99ACF /* ExpandingCell.xib in Resources */,
