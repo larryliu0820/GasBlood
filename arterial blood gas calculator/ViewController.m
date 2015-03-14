@@ -226,7 +226,7 @@ enum {
 - (IBAction)calculate:(id)sender {
     // Get values from text fields.
     for (UITextField* tempTextField in textFields){
-        [self getResultFromTextFields:tempTextField];
+        [self getInputFromText:tempTextField];
     }
     CGFloat eph = 6.1 + log(HCO3 / (PaCO2 * 0.0301)) / log(10);
     CGFloat ehco3 = pow(10, pH - 6.1) * 0.0301 * PaCO2;
@@ -398,7 +398,8 @@ enum {
     return [[NSScanner scannerWithString:checkText] scanFloat:NULL];
 }
 
-- (void)getResultFromTextFields:(UITextField *)textField {
+- (void)getInputFromText:(UITextField *)textField {
+    NSLog(@"textField = %@",textField.text);
     CGFloat floatValue = (CGFloat)[textField.text floatValue];
     if ([self isNumeric:textField.text] == NO ) {
         NSLog(@"is not numeric");
@@ -439,12 +440,22 @@ enum {
     }
 }
 
-- (void)textFieldDidChange: (UITextField *)textField {
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    UITextField* tempTextField = [[UITextField alloc] init];
+    tempTextField.tag = textField.tag;
+    tempTextField.text =[textField.text stringByReplacingCharactersInRange:range withString:string];
+    [self getInputFromText:tempTextField];
     NSLog(@"change!");
+    [self updateCalcBtnState];
+    return YES;
+}
+
+- (void)updateCalcBtnState{
     BOOL isAllFull = YES;
     for (int i = 0; i < 3; i++) {
         UITextField *tempTextField = (UITextField*)textFields[i];
         if (tempTextField.text == nil || [tempTextField.text  isEqual: @""]) {
+            NSLog(@"here");
             isAllFull = NO;
         }
     }
@@ -457,8 +468,12 @@ enum {
     }
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    [self getResultFromTextFields:textField];
+- (BOOL)textFieldShouldClear:(UITextField *)textField{
+    NSLog(@"textFieldShouldClear:");
+    textField.text = @"";
+    [self getInputFromText:textField];
+    [self updateCalcBtnState];
+    return YES;
 }
 
 - (CGFloat) anionGap {

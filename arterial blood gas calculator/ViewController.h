@@ -16,9 +16,6 @@
     NSArray *textArray;
 }
 
-- (IBAction) textFieldDidEndEditing : (id) sender;
-- (IBAction)textFieldDidChange:(id)sender;
-
 @property (nonatomic, strong) IBOutletCollection(UITextField) NSArray *textFields;
 @property (weak, nonatomic) IBOutlet UITextView *resultTextView;
 
