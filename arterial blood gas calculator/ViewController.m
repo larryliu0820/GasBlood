@@ -303,7 +303,7 @@ enum {
         if ((pH > (phLow + 0.02)) && (pH < (phHigh - 0.02001))) {
             resultText = [@"(1)部分代偿的原发呼吸性酸中毒，或\n(2)急性合并慢性呼吸性酸"// acute superimposed on chronic//
                           stringByAppendingString:resultText];
-            resultText = [resultText stringByAppendingString:@", 或\n(3)混合型急性呼吸性酸中毒伴轻度代谢性碱中毒"];
+            resultText = [resultText stringByAppendingString:@", 或\n(3)急性呼吸性酸中毒混合轻度代谢性碱中毒"];
         }
         
         expectedText = [NSString stringWithFormat:@"若pH < %f 且 HCO3 < %f, 则为急性（失代偿）\n若pH > %f 且 HCO3 > %f, 则为慢性（代偿）", phLow, hco3Low, phHigh, hco3High];
