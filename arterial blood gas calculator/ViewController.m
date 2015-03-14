@@ -267,11 +267,10 @@ enum {
     
     expectedPco2 = [self roundNum:expectedPco2 numDigits:0];
     NSString *postfix = @"";
-    if (PaCO2 > (expectedPco2 + 2)) {postfix = @",\n合并呼吸性酸中毒";}
-    if (PaCO2 < (expectedPco2 - 2)) {postfix = @",\n合并呼吸性碱中毒";}
-    if (PaCO2 <= (expectedPco2 + 2) && PaCO2 >= (expectedPco2 - 2)) {postfix = @",\n伴完全呼吸代偿";}
+    if (PaCO2 > (expectedPco2 + 2)) {[resultText stringByAppendingString:@",\n合并呼吸性酸中毒"];}
+    if (PaCO2 < (expectedPco2 - 2)) {[resultText stringByAppendingString:@",\n合并呼吸性碱中毒"];}
+    if (PaCO2 <= (expectedPco2 + 2) && PaCO2 >= (expectedPco2 - 2)) {[resultText stringByAppendingString:@",\n伴完全呼吸代偿"];}
     
-    resultText = [resultText stringByAppendingString:postfix];
     expectedText = [NSString stringWithFormat:@"(预计 Pco2 = %f - %f)", expectedPco2 - 2, expectedPco2 + 2];
     
     // Primary Respiratory Disorders
