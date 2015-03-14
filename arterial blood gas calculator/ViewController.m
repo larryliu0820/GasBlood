@@ -303,7 +303,8 @@ enum {
         }
         
         if ((pH > (phLow + 0.02)) && (pH < (phHigh - 0.02001))) {
-            resultText = [@"(1)部分代偿的原发呼吸性酸中毒，或\n(2)急性合并慢性呼吸性酸"// acute superimposed on chronic//
+            resultText = [@"(1)部分代偿的原发呼吸性酸中毒，或\n(2)急性合并慢性呼吸性酸中毒"
+                          // acute superimposed on chronic//
                           stringByAppendingString:resultText];
             resultText = [resultText stringByAppendingString:@", 或\n(3)急性呼吸性酸中毒混合轻度代谢性碱中毒"];
         }
