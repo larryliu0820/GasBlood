@@ -225,6 +225,9 @@ enum {
 }
 - (IBAction)calculate:(id)sender {
     // Get values from text fields.
+    for (UITextField* tempTextField in textFields){
+        [self getResultFromTextFields:tempTextField];
+    }
     CGFloat eph = 6.1 + log(HCO3 / (PaCO2 * 0.0301)) / log(10);
     CGFloat ehco3 = pow(10, pH - 6.1) * 0.0301 * PaCO2;
     CGFloat eco2 = HCO3 / (0.0301 * pow(10, pH - 6.1));
@@ -392,11 +395,11 @@ enum {
     resultTextView.text = nil;
 }
 
--(bool) isNumeric:(NSString*) checkText{
+- (bool) isNumeric:(NSString*) checkText{
     return [[NSScanner scannerWithString:checkText] scanFloat:NULL];
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
+- (void)getResultFromTextFields:(UITextField *)textField {
     CGFloat floatValue = (CGFloat)[textField.text floatValue];
     if ([self isNumeric:textField.text] == NO ) {
         NSLog(@"is not numeric");
@@ -435,6 +438,10 @@ enum {
         default:
             break;
     }
+}
+
+- (void)textFieldDidChange: (UITextField *)textField {
+    NSLog(@"change!");
     BOOL isAllFull = YES;
     for (int i = 0; i < 3; i++) {
         UITextField *tempTextField = (UITextField*)textFields[i];
@@ -445,7 +452,14 @@ enum {
     if (isAllFull) {
         calculateButton.alpha = 1;
         calculateButton.enabled = YES;
+    } else {
+        calculateButton.alpha = 0.4;
+        calculateButton.enabled = NO;
     }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [self getResultFromTextFields:textField];
 }
 
 - (CGFloat) anionGap {
