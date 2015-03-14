@@ -242,7 +242,7 @@ enum {
         resultText = @"原发代谢性酸中毒";
         expectedPco2 = 1.5 * HCO3 + 8;
         agap = [self anionGap];
-        if (agap <= 16) {
+        if (agap <= 16 && agap > 0) {
             resultText = [resultText stringByAppendingString:@"（正常阴离子间隙）"];
         }else {
             resultText = [resultText stringByAppendingString:@"（阴离子间隙升高）"];
@@ -392,21 +392,27 @@ enum {
     resultTextView.text = nil;
 }
 
+-(bool) isNumeric:(NSString*) checkText{
+    return [[NSScanner scannerWithString:checkText] scanFloat:NULL];
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    if (textField.text == nil || [textField.text  isEqual: @""]) {
-        return;
-    }
     CGFloat floatValue = (CGFloat)[textField.text floatValue];
-    if (floatValue <= 0.0) {
-        alertView = [[UIAlertView alloc] initWithTitle:@"输入错误，请重新输入!" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alertView show];
-        textField.text = nil;
-        calculateButton.alpha = 0.4;
-        calculateButton.enabled = NO;
-        return;
+    if ([self isNumeric:textField.text] == NO ) {
+        NSLog(@"is not numeric");
+        if (textField.text == nil || [textField.text isEqual:@""]) {
+            NSLog(@"is nil");
+            floatValue = 0.0;
+        } else {
+            alertView = [[UIAlertView alloc] initWithTitle:@"输入错误，请重新输入!" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alertView show];
+            textField.text = nil;
+            calculateButton.alpha = 0.4;
+            calculateButton.enabled = NO;
+            return;
+        }
     }
     
-    NSLog(@"here!textView.tag = %li, %f", textField.tag, floatValue);
     switch (textField.tag) {
         case pHFieldTag:
             pH = floatValue;
