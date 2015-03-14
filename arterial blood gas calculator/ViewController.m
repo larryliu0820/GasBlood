@@ -314,7 +314,7 @@ enum {
         expectedText = [NSString stringWithFormat:@"若pH < %f 且 HCO3 < %f, 则为急性（失代偿）\n若pH > %f 且 HCO3 > %f, 则为慢性（代偿）", phLow, hco3Low, phHigh, hco3High];
     }
     
-    if ((pH > 7.4) && (PaCO2 < 36)) {
+    if ((pH > 7.40001) && (PaCO2 < 36)) {
         resultText = @"原发呼吸性碱中毒";
         phLow = 7.4 + (0.0017 * (40 - PaCO2));
         phHigh = 7.4 + (0.008 * (40 - PaCO2));
