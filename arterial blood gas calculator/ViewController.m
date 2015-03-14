@@ -244,7 +244,7 @@ enum {
         agap = [self anionGap];
         if (agap <= 16 && agap > 0) {
             resultText = [resultText stringByAppendingString:@"（正常阴离子间隙）"];
-        }else {
+        }else if(agap > 16){
             resultText = [resultText stringByAppendingString:@"（阴离子间隙升高）"];
             CGFloat agapChange = agap - 12;
             CGFloat bicarbChange = 24 - HCO3;
