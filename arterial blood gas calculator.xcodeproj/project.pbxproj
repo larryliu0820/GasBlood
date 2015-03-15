@@ -23,6 +23,7 @@
 		F23826401AA6D3E30075F99A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F238263F1AA6D3E30075F99A /* Images.xcassets */; };
 		F23826431AA6D3E30075F99A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F23826411AA6D3E30075F99A /* LaunchScreen.xib */; };
 		F238264F1AA6D3E30075F99A /* arterial_blood_gas_calculatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F238264E1AA6D3E30075F99A /* arterial_blood_gas_calculatorTests.m */; };
+		F285D9041AB4EDAB00AB57D1 /* launching2@ip5.png in Resources */ = {isa = PBXBuildFile; fileRef = F285D9031AB4EDAB00AB57D1 /* launching2@ip5.png */; };
 		F29E12591AB2D68A000F403A /* lauching.png in Resources */ = {isa = PBXBuildFile; fileRef = F29E12581AB2D68A000F403A /* lauching.png */; };
 		F29E125B1AB2D9A5000F403A /* launching2.png in Resources */ = {isa = PBXBuildFile; fileRef = F29E125A1AB2D9A5000F403A /* launching2.png */; };
 		F2D545261AB016E000A99ACF /* ExpandingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2D545251AB016E000A99ACF /* ExpandingCell.xib */; };
@@ -62,6 +63,7 @@
 		F23826481AA6D3E30075F99A /* arterial blood gas calculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "arterial blood gas calculatorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F238264D1AA6D3E30075F99A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F238264E1AA6D3E30075F99A /* arterial_blood_gas_calculatorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = arterial_blood_gas_calculatorTests.m; sourceTree = "<group>"; };
+		F285D9031AB4EDAB00AB57D1 /* launching2@ip5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launching2@ip5.png"; sourceTree = "<group>"; };
 		F29E12581AB2D68A000F403A /* lauching.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lauching.png; sourceTree = "<group>"; };
 		F29E125A1AB2D9A5000F403A /* launching2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launching2.png; sourceTree = "<group>"; };
 		F2D545251AB016E000A99ACF /* ExpandingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpandingCell.xib; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				585B2EF11AB2F2150098BFD6 /* ABGicon@3x.png */,
 				F29E12581AB2D68A000F403A /* lauching.png */,
 				F29E125A1AB2D9A5000F403A /* launching2.png */,
+				F285D9031AB4EDAB00AB57D1 /* launching2@ip5.png */,
 				F23826361AA6D3E30075F99A /* AppDelegate.h */,
 				F23826371AA6D3E30075F99A /* AppDelegate.m */,
 				F23826391AA6D3E30075F99A /* ViewController.h */,
@@ -217,6 +220,7 @@
 				TargetAttributes = {
 					F238262E1AA6D3E30075F99A = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = E334B9WKM7;
 					};
 					F23826471AA6D3E30075F99A = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -262,6 +266,7 @@
 				F29E125B1AB2D9A5000F403A /* launching2.png in Resources */,
 				F2D545261AB016E000A99ACF /* ExpandingCell.xib in Resources */,
 				F23826401AA6D3E30075F99A /* Images.xcassets in Resources */,
+				F285D9041AB4EDAB00AB57D1 /* launching2@ip5.png in Resources */,
 				58A854301AB1CCE200CFDB05 /* help2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,9 +410,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "arterial blood gas calculator/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -416,9 +426,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "arterial blood gas calculator/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
