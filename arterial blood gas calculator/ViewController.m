@@ -252,9 +252,9 @@ enum {
             CGFloat agapChange = agap - 12;
             CGFloat bicarbChange = 24 - HCO3;
             
-            if ((agapChange - bicarbChange) > 7) {
+            if ((agapChange - bicarbChange) > 2) {
                 resultText = [resultText stringByAppendingString:@",\n混合代谢性碱中毒"];
-            }else if((agapChange - bicarbChange) < -7) {
+            }else if((agapChange - bicarbChange) < -2) {
                 resultText = [resultText stringByAppendingString:@",\n混合正常阴离子间隙的代谢性酸中毒"];
             }
         }
@@ -267,8 +267,9 @@ enum {
     
     expectedPco2 = [self roundNum:expectedPco2 numDigits:0];
     NSString *postfix = @"";
-    if (PaCO2 > (expectedPco2 + 2)) {[resultText stringByAppendingString:@",\n合并呼吸性酸中毒"];}
-    if (PaCO2 < (expectedPco2 - 2)) {[resultText stringByAppendingString:@",\n合并呼吸性碱中毒"];}
+    NSLog(@"PaCO2 = %f, expectedPco2 = %f", PaCO2, expectedPco2);
+    if (PaCO2 > (expectedPco2 + 2)) {resultText = [resultText stringByAppendingString:@",\n合并呼吸性酸中毒"];}
+    if (PaCO2 < (expectedPco2 - 2)) {resultText = [resultText stringByAppendingString:@",\n合并呼吸性碱中毒"];}
     if (PaCO2 <= (expectedPco2 + 2) && PaCO2 >= (expectedPco2 - 2)) {[resultText stringByAppendingString:@",\n伴完全呼吸代偿"];}
     
     expectedText = [NSString stringWithFormat:@"(预计 Pco2 = %f - %f)", expectedPco2 - 2, expectedPco2 + 2];
@@ -305,7 +306,7 @@ enum {
         }
         
         if ((pH > (phLow + 0.02)) && (pH < (phHigh - 0.02001))) {
-            resultText = [@"(1)部分代偿的原发呼吸性酸中毒，或\n(2)急性合并慢性呼吸性酸中毒"
+            resultText = [@"(1)部分代偿的原发呼吸性酸中毒，或\n(2)急性合并慢性"
                           // acute superimposed on chronic//
                           stringByAppendingString:resultText];
             resultText = [resultText stringByAppendingString:@", 或\n(3)急性呼吸性酸中毒混合轻度代谢性碱中毒"];
@@ -387,6 +388,7 @@ enum {
                               
 }
 
+
 - (IBAction)clearInput:(id)sender {
     for (UITextField* tempTextField in textFields) {
         tempTextField.text = nil;
@@ -399,12 +401,9 @@ enum {
 }
 
 - (void)getInputFromText:(UITextField *)textField {
-    NSLog(@"textField = %@",textField.text);
     CGFloat floatValue = (CGFloat)[textField.text floatValue];
     if ([self isNumeric:textField.text] == NO ) {
-        NSLog(@"is not numeric");
         if (textField.text == nil || [textField.text isEqual:@""]) {
-            NSLog(@"is nil");
             floatValue = 0.0;
         } else {
             alertView = [[UIAlertView alloc] initWithTitle:@"输入错误，请重新输入!" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
@@ -445,7 +444,6 @@ enum {
     tempTextField.tag = textField.tag;
     tempTextField.text =[textField.text stringByReplacingCharactersInRange:range withString:string];
     [self getInputFromText:tempTextField];
-    NSLog(@"change!");
     [self updateCalcBtnState];
     return YES;
 }
@@ -455,7 +453,6 @@ enum {
     for (int i = 0; i < 3; i++) {
         UITextField *tempTextField = (UITextField*)textFields[i];
         if (tempTextField.text == nil || [tempTextField.text  isEqual: @""]) {
-            NSLog(@"here");
             isAllFull = NO;
         }
     }
@@ -485,6 +482,11 @@ enum {
     thisNum = round(thisNum);
     thisNum = thisNum / pow(10,dec);
     return thisNum;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 @end
