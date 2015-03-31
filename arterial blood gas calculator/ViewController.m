@@ -57,7 +57,7 @@ enum {
     
     infoLabel =[[UILabel alloc] initWithFrame:CGRectMake(widthMargin,0,width - 2 * widthMargin, height)];
     [infoLabel setNumberOfLines:0];
-    NSString *info = @"版本：1.0.0\n制作者：Larry 梦子\nEmail：mengweiliu600267@gmail.com\n\n\t感谢您下载使用动脉血气分析！由于血气分析的计算公式复杂，临床上判断多重酸碱失衡十分不便，我们萌生了使用程序代替笔算的想法。\n\t当前App Store中的免费血气分析软件，大多需要填写过多指标而难以使用。本软件使用简化的计算指标，帮助您快速输入指标；帮助页面内提供简要的解释，便于您使用。\n\t再次感谢！";
+    NSString *info = @"版本：1.1.0\n制作者：Larry 梦子\nEmail：mengweiliu600267@gmail.com\n\n\t感谢您下载使用动脉血气分析！由于血气分析的计算公式复杂，临床上判断多重酸碱失衡十分不便，我们萌生了使用程序代替笔算的想法。\n\t当前App Store中的免费血气分析软件，大多需要填写过多指标而难以使用。本软件使用简化的计算指标，帮助您快速输入指标；帮助页面内提供简要的解释，便于您使用。\n\t再次感谢！";
     NSMutableAttributedString* attrString = [[NSMutableAttributedString alloc] initWithString:info];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     [style setLineSpacing:6];
@@ -394,6 +394,8 @@ enum {
         tempTextField.text = nil;
     }
     resultTextView.text = nil;
+    calculateButton.alpha = 0.4;
+    calculateButton.enabled = NO;
 }
 
 - (bool) isNumeric:(NSString*) checkText{
@@ -466,7 +468,6 @@ enum {
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField{
-    NSLog(@"textFieldShouldClear:");
     textField.text = @"";
     [self getInputFromText:textField];
     [self updateCalcBtnState];
