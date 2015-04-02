@@ -240,6 +240,7 @@ enum {
     NSString *expectedText = @"";
     CGFloat expectedPco2 = 0.0;
     CGFloat agap = 0.0;
+    NSString *postfix = @"";
     // Primary Metabolic Disorders
     if ((pH < 7.36) && (PaCO2 <= 40)) {
         resultText = @"原发代谢性酸中毒";
@@ -258,21 +259,31 @@ enum {
                 resultText = [resultText stringByAppendingString:@",\n混合正常阴离子间隙的代谢性酸中毒"];
             }
         }
+        expectedPco2 = [self roundNum:expectedPco2 numDigits:0];
+        
+        NSLog(@"PaCO2 = %f, expectedPco2 = %f", PaCO2, expectedPco2);
+        if (PaCO2 > (expectedPco2 + 2)) {resultText = [resultText stringByAppendingString:@",\n合并呼吸性酸中毒"];}
+        if (PaCO2 < (expectedPco2 - 2)) {resultText = [resultText stringByAppendingString:@",\n合并呼吸性碱中毒"];}
+        if (PaCO2 <= (expectedPco2 + 2) && PaCO2 >= (expectedPco2 - 2)) {resultText = [resultText stringByAppendingString:@",\n伴完全呼吸代偿"];}
+        
+        expectedText = [NSString stringWithFormat:@"(预计 Pco2 = %f - %f)", expectedPco2 - 2, expectedPco2 + 2];
+
     }
     
     if ((pH > 7.44) && (PaCO2 >= 40)) {
         resultText = @"原发代谢性碱中毒";
         expectedPco2 = 0.7 * HCO3 + 21;
+        expectedPco2 = [self roundNum:expectedPco2 numDigits:0];
+        
+        NSLog(@"PaCO2 = %f, expectedPco2 = %f", PaCO2, expectedPco2);
+        if (PaCO2 > (expectedPco2 + 2)) {resultText = [resultText stringByAppendingString:@",\n合并呼吸性酸中毒"];}
+        if (PaCO2 < (expectedPco2 - 2)) {resultText = [resultText stringByAppendingString:@",\n合并呼吸性碱中毒"];}
+        if (PaCO2 <= (expectedPco2 + 2) && PaCO2 >= (expectedPco2 - 2)) {resultText = [resultText stringByAppendingString:@",\n伴完全呼吸代偿"];}
+        
+        expectedText = [NSString stringWithFormat:@"(预计 Pco2 = %f - %f)", expectedPco2 - 2, expectedPco2 + 2];
+
     }
     
-    expectedPco2 = [self roundNum:expectedPco2 numDigits:0];
-    NSString *postfix = @"";
-    NSLog(@"PaCO2 = %f, expectedPco2 = %f", PaCO2, expectedPco2);
-    if (PaCO2 > (expectedPco2 + 2)) {resultText = [resultText stringByAppendingString:@",\n合并呼吸性酸中毒"];}
-    if (PaCO2 < (expectedPco2 - 2)) {resultText = [resultText stringByAppendingString:@",\n合并呼吸性碱中毒"];}
-    if (PaCO2 <= (expectedPco2 + 2) && PaCO2 >= (expectedPco2 - 2)) {[resultText stringByAppendingString:@",\n伴完全呼吸代偿"];}
-    
-    expectedText = [NSString stringWithFormat:@"(预计 Pco2 = %f - %f)", expectedPco2 - 2, expectedPco2 + 2];
     
     // Primary Respiratory Disorders
     if ((pH < 7.4) && (PaCO2 > 44)) {
@@ -290,18 +301,18 @@ enum {
         if (pH <= (phLow + 0.02)) {
             resultText = [@"急性（失代偿）" stringByAppendingString:resultText];
             if (HCO3 < (hco3Low - 2)) {
-                [resultText stringByAppendingString:@",\n合并代谢性酸中毒"];
+                resultText = [resultText stringByAppendingString:@",\n合并代谢性酸中毒"];
                 agap = [self anionGap];
                 if (agap <= 16) {postfix = @"（正常阴离子间隙）";}
                 else {postfix = @"（阴离子间隙升高）";}
-                [resultText stringByAppendingString:postfix];
+                resultText = [resultText stringByAppendingString:postfix];
             }
         }
         
         if (pH >= (phHigh - 0.02001)) {
             resultText = [@"慢性（代偿）" stringByAppendingString:resultText];
             if (HCO3 > (hco3High + 2)) {
-                [resultText stringByAppendingString:@",\n伴代谢性碱中毒"];
+                resultText = [resultText stringByAppendingString:@",\n伴代谢性碱中毒"];
             }
         }
         
@@ -363,9 +374,9 @@ enum {
                 expectedPco2 = 1.5 * HCO3 + 8;
                 agap = [self anionGap];
                 if (agap <= 16) {
-                    [resultText stringByAppendingString:@"（正常阴离子间隙）"];
+                    resultText = [resultText stringByAppendingString:@"（正常阴离子间隙）"];
                 }else {
-                    [resultText stringByAppendingString:@"（阴离子间隙升高）"];
+                    resultText = [resultText stringByAppendingString:@"（阴离子间隙升高）"];
                 }
             } else {
                 agap = [self anionGap];
