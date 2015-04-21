@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@interface ViewController : UIViewController<UIApplicationDelegate, UITableViewDelegate,UITableViewDataSource> {
+@interface ViewController : UIViewController<UIAlertViewDelegate,UIApplicationDelegate, UITableViewDelegate,UITableViewDataSource> {
     IBOutletCollection(UITextField) NSArray *textFields;
     
     int selectedIndex;
@@ -29,9 +29,7 @@
 @property (nonatomic, readwrite) CGFloat Na;
 @property (nonatomic, readwrite) CGFloat Cl;
 
-@property (nonatomic, strong) IBOutletCollection(UILabel) NSArray *rightLabels;
-
-@property (nonatomic, retain) UIAlertView *alertView;
+@property (nonatomic, strong) IBOutletCollection(UILabel) NSArray *labels;
 
 @property (weak, nonatomic) IBOutlet UILabel *disclaimLabel;
 
@@ -48,6 +46,9 @@
 @property (retain, nonatomic) UITableView *helpTableView;
 
 @property (retain, nonatomic) NSMutableArray *textHeights;
+
+@property (retain, nonatomic) NSArray *hplusValues;
+@property (retain, nonatomic) NSArray *phValues;
 
 @end
 

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14D87p" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D87p" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,7 +15,7 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" id="0px-YT-ovP">
                                 <rect key="frame" x="0.0" y="18" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="barTintColor" red="0.10375068509008775" green="0.11474699196408174" blue="0.12794961734693877" alpha="0.63" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="22"/>
@@ -95,13 +96,6 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
                                             </textField>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Ei8-ge-XP5">
-                                                <rect key="frame" x="19" y="208" width="283" height="231"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
                                             <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" placeholder="g/L" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" id="SEB-VG-WRY">
                                                 <rect key="frame" x="222" y="110" width="60" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -161,7 +155,7 @@
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="calculate:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="C82-jP-5T1"/>
+                                                    <action selector="calculateClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="pX1-qY-EA8"/>
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="mmol/L" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" id="MM3-Du-RqU">
@@ -178,6 +172,13 @@
                                                 <color key="textColor" red="0.055333698709999997" green="0.061198395709999999" blue="0.068239795919999999" alpha="0.63" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Ei8-ge-XP5">
+                                                <rect key="frame" x="19" y="208" width="283" height="231"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -198,14 +199,17 @@
                         <outlet property="navigationBar" destination="0px-YT-ovP" id="WDr-Dx-4tD"/>
                         <outlet property="resultTextView" destination="Ei8-ge-XP5" id="v7x-kX-Vag"/>
                         <outletCollection property="textFields" destination="bAp-2Q-cJE" id="5Dq-TE-UP3"/>
-                        <outletCollection property="textFields" destination="5Zm-SW-X0M" id="2gX-2t-GTF"/>
-                        <outletCollection property="textFields" destination="MM3-Du-RqU" id="NGb-FE-vUa"/>
-                        <outletCollection property="textFields" destination="oUk-Ga-Fg5" id="gt7-jI-crF"/>
-                        <outletCollection property="textFields" destination="hBc-Dy-oXT" id="0Dw-w4-Laj"/>
-                        <outletCollection property="textFields" destination="SEB-VG-WRY" id="ERr-3t-h5d"/>
-                        <outletCollection property="rightLabels" destination="mn3-e0-n5Y" id="mep-kj-tmT"/>
-                        <outletCollection property="rightLabels" destination="VDm-1e-S0z" id="pha-GE-iGV"/>
-                        <outletCollection property="rightLabels" destination="HYX-RV-nZ1" id="Zln-AQ-jR7"/>
+                        <outletCollection property="labels" destination="gOf-vV-biY" id="G45-dU-sus"/>
+                        <outletCollection property="textFields" destination="5Zm-SW-X0M" id="JfR-VV-tcC"/>
+                        <outletCollection property="textFields" destination="MM3-Du-RqU" id="U7B-sQ-A1Y"/>
+                        <outletCollection property="textFields" destination="oUk-Ga-Fg5" id="JOe-cw-oAU"/>
+                        <outletCollection property="textFields" destination="hBc-Dy-oXT" id="0S3-Pu-lXy"/>
+                        <outletCollection property="textFields" destination="SEB-VG-WRY" id="m7k-cS-cdt"/>
+                        <outletCollection property="labels" destination="SmF-6V-N1I" id="rEs-EX-ij5"/>
+                        <outletCollection property="labels" destination="nZR-bd-AcV" id="JQo-Ue-HHN"/>
+                        <outletCollection property="labels" destination="mn3-e0-n5Y" id="Qbm-G2-Xkg"/>
+                        <outletCollection property="labels" destination="VDm-1e-S0z" id="X2D-x7-05s"/>
+                        <outletCollection property="labels" destination="HYX-RV-nZ1" id="eFv-Ok-PLr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

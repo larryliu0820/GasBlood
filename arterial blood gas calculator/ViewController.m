@@ -8,13 +8,26 @@
 
 #import "ViewController.h"
 #import "ExpandingCell.h"
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)
+
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+
+#define IS_IPHONE_4_OR_LESS (IS_IPHONE && SCREEN_MAX_LENGTH < 568.0)
+#define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
+#define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
+#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
 
-@synthesize alertView, textFields, pH, PaCO2, HCO3, Alb, Na, Cl,clearButton, calculateButton, resultTextView, rightLabels, disclaimLabel, infoButton,infoView, infoLabel, mainView, navigationBar, middleView, helpTableView, helpButton, textHeights;
+@synthesize textFields, pH, PaCO2, HCO3, Alb, Na, Cl,clearButton, calculateButton, resultTextView, labels, disclaimLabel, infoButton,infoView, infoLabel, mainView, navigationBar, middleView, helpTableView, helpButton, textHeights, hplusValues, phValues;
 
 enum {
     pHFieldTag = 0,
@@ -23,33 +36,63 @@ enum {
     NaFieldTag,
     ClFieldTag,
     AlbFieldTag,
+    wrongInputAlertTag,
+    inconsistencyAlertTag
 };
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    hplusValues = [[NSArray alloc] initWithObjects:@100,@89,@79,@71,@63,@56,@50,@45,@40,@35,@32,@28,@25,@22, nil];
+    phValues = [[NSArray alloc]initWithObjects:@7.00,@7.05,@7.10,@7.15,@7.20,@7.25,@7.30,@7.35,@7.40,@7.45,@7.50,@7.55,@7.60,@7.65, nil];
     CGFloat widthMargin = 19;
     CGFloat width = [[UIScreen mainScreen] bounds].size.width;
+    navigationBar.frame = CGRectMake(0, navigationBar.frame.origin.y, width, navigationBar.frame.size.height);
     CGFloat height = [[UIScreen mainScreen] bounds].size.height - navigationBar.frame.origin.y - navigationBar.frame.size.height;
     middleView.frame = CGRectMake(0, navigationBar.frame.origin.y + navigationBar.frame.size.height, width, height);
     mainView.frame = CGRectMake(0, 0, middleView.frame.size.width, middleView.frame.size.height);
-
     
+    // info button
+    infoButton.frame = CGRectMake(width - widthMargin - infoButton.frame.size.width, infoButton.frame.origin.y, infoButton.frame.size.width, infoButton.frame.size.height);
+
+    // text fields and labels
+    UITextField *firstField = textFields[0];
+    CGFloat firstCenterY = firstField.center.y;
+    CGFloat verticalSep = 45;
+    if (IS_IPHONE_6) {
+        NSLog(@"iphone 6");
+        verticalSep = 60;
+    }else if(IS_IPHONE_6P) {
+        NSLog(@"iphone 6p");
+        verticalSep = 75;
+    }
     for (UITextField *tempTextField in textFields) {
         tempTextField.delegate = self;
-        if (tempTextField.tag > 2) {
-            CGFloat originalX = tempTextField.center.x;
+        // adjustment
+        CGFloat originalX = tempTextField.center.x;
+        
+        if (tempTextField.tag <= 2) {
+            tempTextField.center = CGPointMake(tempTextField.center.x, firstCenterY + (tempTextField.tag * verticalSep));
+        }else if (tempTextField.tag > 2) {
+            tempTextField.center = CGPointMake(tempTextField.center.x, firstCenterY + ((tempTextField.tag - 3) * verticalSep));
+
             tempTextField.frame = CGRectMake(width - 2 * widthMargin - tempTextField.frame.size.width, tempTextField.center.y - tempTextField.frame.size.height / 2, tempTextField.frame.size.width, tempTextField.frame.size.height);
-            UILabel *tempLabel = rightLabels[tempTextField.tag - 3];
-            tempLabel.center = CGPointMake(tempLabel.center.x + tempTextField.center.x - originalX, tempLabel.center.y);
+            
         }
+        
+        UILabel *tempLabel = labels[tempTextField.tag];
+        tempLabel.center = CGPointMake(tempLabel.center.x + tempTextField.center.x - originalX, tempTextField.center.y);
+        
     }
-    infoButton.frame = CGRectMake(width - widthMargin - infoButton.frame.size.width, infoButton.frame.origin.y, infoButton.frame.size.width, infoButton.frame.size.height);
-    calculateButton.frame = CGRectMake(width - 2 * widthMargin - calculateButton.frame.size.width, calculateButton.frame.origin.y, calculateButton.frame.size.width, calculateButton.frame.size.height);
+    // Adjust two buttons
+    UITextField *bottomField = textFields[2];
+    CGFloat bottomFieldStartY = bottomField.frame.origin.y;
+    clearButton.frame = CGRectMake(clearButton.frame.origin.x, bottomFieldStartY + verticalSep, clearButton.frame.size.width, clearButton.frame.size.height);
+    calculateButton.frame = CGRectMake(width - 2 * widthMargin - calculateButton.frame.size.width, bottomFieldStartY + verticalSep, calculateButton.frame.size.width, calculateButton.frame.size.height);
     calculateButton.alpha = 0.4;
     calculateButton.enabled = NO;
-    // Do any additional setup after loading the view, typically from a nib.
-    resultTextView.frame = CGRectMake(widthMargin, clearButton.frame.origin.y + clearButton.frame.size.height + 15, width - 2 * widthMargin, height - 67 - resultTextView.frame.origin.y);
+    
+    // Adjust result text view
+    resultTextView.frame = CGRectMake(widthMargin, clearButton.frame.origin.y + clearButton.frame.size.height + 15, width - 2 * widthMargin, height - 82 - clearButton.frame.origin.y - clearButton.frame.size.height);
     resultTextView.editable = NO;
     disclaimLabel.frame = CGRectMake(widthMargin, (resultTextView.frame.origin.y + resultTextView.frame.size.height + height - disclaimLabel.frame.size.height)/2, width - 2 * widthMargin, disclaimLabel.frame.size.height);
     
@@ -223,11 +266,92 @@ enum {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)calculate:(id)sender {
+
+- (BOOL)checkDataConsistency {
+    //[H+]=24*PaCO2/HCO3-
+    CGFloat hplus = 24 * PaCO2 / HCO3;
+    if (hplus > [[hplusValues firstObject] floatValue] ||
+        hplus < [[hplusValues lastObject] floatValue]) {
+        [self showInconsistencyAlert];
+        return NO;
+    }
+    
+    
+
+    for (int i = 0; i < [hplusValues count] - 1; i++) {
+        // if H+ is at critical value
+        if (hplus == [[hplusValues objectAtIndex:i] floatValue]) {
+            if (i == 0) {
+                if(pH < [[phValues firstObject] floatValue] ||
+                   pH > [[phValues objectAtIndex:1] floatValue]) {
+                    [self showInconsistencyAlert];
+                    return NO;
+                }
+            }else if (i == [hplusValues count]) {
+                if(pH > [[phValues lastObject] floatValue] ||
+                   pH < [[phValues objectAtIndex:([phValues count]-2)] floatValue]) {
+                    [self showInconsistencyAlert];
+                    return NO;
+                }
+            }else {
+                if(pH > [[phValues objectAtIndex:i+1] floatValue] ||
+                   pH < [[phValues objectAtIndex:i-1] floatValue]) {
+                    [self showInconsistencyAlert];
+                    return NO;
+                }
+            }
+            return YES;
+        }
+        
+        // H+ is between two critical values
+        if (hplus < [[hplusValues objectAtIndex:i] floatValue] &&
+            hplus > [[hplusValues objectAtIndex:i+1] floatValue]) {
+            if (pH < [[phValues objectAtIndex:i] floatValue] ||
+                pH > [[phValues objectAtIndex:i+1] floatValue]) {
+                NSLog(@"hplus = %f, pH = %f", hplus, pH);
+                [self showInconsistencyAlert];
+                return NO;
+            }
+            return YES;
+        }
+    }
+    return YES;
+}
+
+- (void)showInconsistencyAlert {
+    UIAlertView *inconsistentAlertView = [[UIAlertView alloc] initWithTitle:@"警告" message:@"血气数值内在不一致，分析结果可能错误。要继续吗？" delegate:self cancelButtonTitle:@"继续" otherButtonTitles:@"重新输入",nil];
+    inconsistentAlertView.tag = inconsistencyAlertTag;
+    [inconsistentAlertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == inconsistencyAlertTag) {
+        NSLog(@"buttonIndex = %li",(long)buttonIndex);
+        if (buttonIndex == 1) {
+            for (UITextField* tempTextField in textFields){
+                tempTextField.text = nil;
+            }
+            resultTextView.text = nil;
+        } else if(buttonIndex == 0) {
+            [self calculate];
+        }
+    }
+}
+
+- (IBAction)calculateClicked:(id)sender {
     // Get values from text fields.
     for (UITextField* tempTextField in textFields){
         [self getInputFromText:tempTextField];
     }
+    // check data consistency
+    BOOL isConsistent = [self checkDataConsistency];
+    if (isConsistent) {
+        [self calculate];
+    }
+}
+
+- (void)calculate {
+
     CGFloat eph = 6.1 + log(HCO3 / (PaCO2 * 0.0301)) / log(10);
     CGFloat ehco3 = pow(10, pH - 6.1) * 0.0301 * PaCO2;
     CGFloat eco2 = HCO3 / (0.0301 * pow(10, pH - 6.1));
@@ -419,8 +543,9 @@ enum {
         if (textField.text == nil || [textField.text isEqual:@""]) {
             floatValue = 0.0;
         } else {
-            alertView = [[UIAlertView alloc] initWithTitle:@"输入错误，请重新输入!" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-            [alertView show];
+            UIAlertView *inputAlertView = [[UIAlertView alloc] initWithTitle:@"输入错误，请重新输入!" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            inputAlertView.tag = wrongInputAlertTag;
+            [inputAlertView show];
             textField.text = nil;
             calculateButton.alpha = 0.4;
             calculateButton.enabled = NO;
