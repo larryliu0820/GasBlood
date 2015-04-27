@@ -45,6 +45,19 @@ enum {
     hplusValues = [[NSArray alloc] initWithObjects:@100,@89,@79,@71,@63,@56,@50,@45,@40,@35,@32,@28,@25,@22, nil];
     phValues = [[NSArray alloc]initWithObjects:@7.00,@7.05,@7.10,@7.15,@7.20,@7.25,@7.30,@7.35,@7.40,@7.45,@7.50,@7.55,@7.60,@7.65, nil];
     CGFloat widthMargin = 19;
+    CGFloat verticalSep = 45;
+    CGFloat fieldWidth = 60;
+    if (IS_IPHONE_6) {
+        NSLog(@"iphone 6");
+        widthMargin = 24;
+        verticalSep = 54;
+        fieldWidth = 70;
+    }else if(IS_IPHONE_6P) {
+        NSLog(@"iphone 6p");
+        widthMargin = 36;
+        verticalSep = 56;
+        fieldWidth = 80;
+    }
     CGFloat width = [[UIScreen mainScreen] bounds].size.width;
     navigationBar.frame = CGRectMake(0, navigationBar.frame.origin.y, width, navigationBar.frame.size.height);
     CGFloat height = [[UIScreen mainScreen] bounds].size.height - navigationBar.frame.origin.y - navigationBar.frame.size.height;
@@ -56,26 +69,21 @@ enum {
 
     // text fields and labels
     UITextField *firstField = textFields[0];
-    CGFloat firstCenterY = firstField.center.y;
-    CGFloat verticalSep = 45;
-    if (IS_IPHONE_6) {
-        NSLog(@"iphone 6");
-        verticalSep = 60;
-    }else if(IS_IPHONE_6P) {
-        NSLog(@"iphone 6p");
-        verticalSep = 75;
-    }
+    CGFloat firstOriginY = firstField.frame.origin.y;
+    CGFloat clearButtonRight = 1.6 * widthMargin + clearButton.frame.size.width;
+    CGFloat calButtonRight = width - 1.6 * widthMargin;
+    
     for (UITextField *tempTextField in textFields) {
         tempTextField.delegate = self;
         // adjustment
         CGFloat originalX = tempTextField.center.x;
         
         if (tempTextField.tag <= 2) {
-            tempTextField.center = CGPointMake(tempTextField.center.x, firstCenterY + (tempTextField.tag * verticalSep));
+            
+            tempTextField.frame = CGRectMake(clearButtonRight - fieldWidth, firstOriginY + (tempTextField.tag * verticalSep), fieldWidth, tempTextField.frame.size.height);
         }else if (tempTextField.tag > 2) {
-            tempTextField.center = CGPointMake(tempTextField.center.x, firstCenterY + ((tempTextField.tag - 3) * verticalSep));
 
-            tempTextField.frame = CGRectMake(width - 2 * widthMargin - tempTextField.frame.size.width, tempTextField.center.y - tempTextField.frame.size.height / 2, tempTextField.frame.size.width, tempTextField.frame.size.height);
+            tempTextField.frame = CGRectMake(calButtonRight - fieldWidth, firstOriginY + ((tempTextField.tag - 3) * verticalSep), fieldWidth, tempTextField.frame.size.height);
             
         }
         
@@ -83,16 +91,17 @@ enum {
         tempLabel.center = CGPointMake(tempLabel.center.x + tempTextField.center.x - originalX, tempTextField.center.y);
         
     }
+    
     // Adjust two buttons
     UITextField *bottomField = textFields[2];
     CGFloat bottomFieldStartY = bottomField.frame.origin.y;
-    clearButton.frame = CGRectMake(clearButton.frame.origin.x, bottomFieldStartY + verticalSep, clearButton.frame.size.width, clearButton.frame.size.height);
-    calculateButton.frame = CGRectMake(width - 2 * widthMargin - calculateButton.frame.size.width, bottomFieldStartY + verticalSep, calculateButton.frame.size.width, calculateButton.frame.size.height);
+    clearButton.frame = CGRectMake(1.6 * widthMargin, bottomFieldStartY + verticalSep, clearButton.frame.size.width, clearButton.frame.size.height);
+    calculateButton.frame = CGRectMake(width - 1.6 * widthMargin - calculateButton.frame.size.width, bottomFieldStartY + verticalSep, calculateButton.frame.size.width, calculateButton.frame.size.height);
     calculateButton.alpha = 0.4;
     calculateButton.enabled = NO;
     
     // Adjust result text view
-    resultTextView.frame = CGRectMake(widthMargin, clearButton.frame.origin.y + clearButton.frame.size.height + 15, width - 2 * widthMargin, height - 82 - clearButton.frame.origin.y - clearButton.frame.size.height);
+    resultTextView.frame = CGRectMake(widthMargin, clearButton.frame.origin.y + clearButton.frame.size.height + 15, width - 2 * widthMargin, height - 63 - widthMargin - clearButton.frame.origin.y - clearButton.frame.size.height);
     resultTextView.editable = NO;
     disclaimLabel.frame = CGRectMake(widthMargin, (resultTextView.frame.origin.y + resultTextView.frame.size.height + height - disclaimLabel.frame.size.height)/2, width - 2 * widthMargin, disclaimLabel.frame.size.height);
     
@@ -100,7 +109,7 @@ enum {
     
     infoLabel =[[UILabel alloc] initWithFrame:CGRectMake(widthMargin,0,width - 2 * widthMargin, height)];
     [infoLabel setNumberOfLines:0];
-    NSString *info = @"版本：1.1.0\n制作者：Larry 梦子\nEmail：mengweiliu600267@gmail.com\n\n\t感谢您下载使用动脉血气分析！由于血气分析的计算公式复杂，临床上判断多重酸碱失衡十分不便，我们萌生了使用程序代替笔算的想法。\n\t当前App Store中的免费血气分析软件，大多需要填写过多指标而难以使用。本软件使用简化的计算指标，帮助您快速输入指标；帮助页面内提供简要的解释，便于您使用。\n\t再次感谢！";
+    NSString *info = @"版本：1.2.0\n制作者：Larry 梦子\nEmail：mengweiliu600267@gmail.com\n\n\t感谢您下载使用动脉血气分析！由于血气分析的计算公式复杂，临床上判断多重酸碱失衡十分不便，我们萌生了使用程序代替笔算的想法。\n\t当前App Store中的免费血气分析软件，大多需要填写过多指标而难以使用。本软件使用简化的计算指标，帮助您快速输入指标；帮助页面内提供简要的解释，便于您使用。\n\t再次感谢！";
     NSMutableAttributedString* attrString = [[NSMutableAttributedString alloc] initWithString:info];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     [style setLineSpacing:6];
